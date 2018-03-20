@@ -1,0 +1,25 @@
+
+Notes
+
+Game loop when running factory:
+
+  A factory step is one cycle of component operations.
+  These component operations occur in an order over multiple frames if necessary.
+  Sample component ordering:
+    Generator/Conveyor Belt
+    Welder
+    Pusher
+    Spinner
+
+  A factory step is made up of frames.
+
+
+
+Components
+  
+  Conveyor Belt
+  Welder
+  Pusher
+  Sensor
+  Wire
+  Welder
