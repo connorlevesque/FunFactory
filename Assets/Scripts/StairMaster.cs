@@ -45,7 +45,7 @@ public class StairMaster : MonoBehaviour {
             Debug.LogFormat("Generator at {0},{1}", machine.x, machine.y);
          }
       };
-      Grid.ForEachMachine(addGenerator);
+      Machines.ForEach(addGenerator);
       return list;
    }
 }

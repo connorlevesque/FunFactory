@@ -6,6 +6,6 @@ public class Crate : GridThing {
    public override void Start() {
       base.Start();
       Debug.LogFormat("Crate created at {0}", xy);
-      Grid.AddCrate(this);
+      Crates.Add(this);
    }
 }

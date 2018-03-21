@@ -6,7 +6,7 @@ public class Machine : GridThing {
 
 	public override void Start () {
       base.Start();
-		Grid.AddMachine(this);
+		Machines.Add(this);
 	}
 	
 	void Update () {

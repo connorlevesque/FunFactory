@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
    public int width;
 
 	void Awake () {
-		Grid.Init(height, width);
+		Machines.Init(height, width);
+      Crates.Init(height, width);
 	}
 }

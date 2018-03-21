@@ -52,11 +52,14 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Crate.cs" />
+     <Compile Include="Assets\Scripts\Crates.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Generator.cs" />
      <Compile Include="Assets\Scripts\Grid.cs" />
+     <Compile Include="Assets\Scripts\GridOf.cs" />
      <Compile Include="Assets\Scripts\GridThing.cs" />
      <Compile Include="Assets\Scripts\Machine.cs" />
+     <Compile Include="Assets\Scripts\Machines.cs" />
      <Compile Include="Assets\Scripts\StairMaster.cs" />
      <None Include="Assets\Notes\OrderOfOps.txt" />
  <Reference Include="UnityEngine.UI">
