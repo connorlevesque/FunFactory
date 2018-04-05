@@ -1,0 +1,16 @@
+
+How to move crates
+
+conveyor belt
+pusher
+other moving crate
+
+
+an initial machine tries to move a crate or crate group
+if another crate is in the way it is pushed
+
+
+try move crate
+  if there is an obstacle in the target square stop
+  if there is a crate in the target square try to move it and then try again
+  

@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Machine : GridThing {
 
+   public bool isObstacle;
+
 	public override void Start () {
       base.Start();
+      isObstacle = true;
 		Machines.Add(this);
 	}
 	
