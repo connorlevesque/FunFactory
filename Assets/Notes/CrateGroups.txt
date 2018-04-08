@@ -1,0 +1,52 @@
+
+Moving Crate Groups
+
+- multiple directions of movement
+
+- given single direction of movement
+  - check that all crates in group can move
+      - handle moving offscreen
+      - check for obstacles
+      - check if blocking crate (groups) can move
+
+For each crate group:
+- each conveyor belt, pusher, generator attempts to record a force acting on the group of crates
+- discard all forces which could not be applied (if they were the only such force)
+- resolve conflicts in the remaining forces
+    - opposing forces cancel
+    - check if one is in the majority
+    - if still tied, add previous force and repeat
+
+
+
+- record forces
+- remove invalid forces
+- resolve remaining forces
+- record dominate force as lastForce
+
+^direct object is crate group (not single crate)
+
+forces = unrealized movements
+
+
+rotation
+- record rotation forces
+- remove invalid rotation forces
+    - all intervening spaces must be passable
+    - can you move crates that are there?
+        - nope! must be totally clear
+- resolve remaining rotation forces
+    - opposing forces cancel
+    - with multiple forces pick anchor
+        - could potentially just pick one
+
+
+rotation competes with translation
+
+
+Storing crate groups as data
+
+crate group class
+
+
+

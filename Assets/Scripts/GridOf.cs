@@ -67,4 +67,22 @@ public class GridOf<T> where T : GridThing {
       width = w;
       ts = new T[width,height];
    }
+
+   // Vector versions
+   public static bool InBounds(Vector2 v) {
+      return InBounds((int)v.x, (int)v.y);
+   }
+
+
+   public static bool ElementAt(Vector2 v) {
+      return ElementAt((int)v.x, (int)v.y);
+   }
+
+   public static T At(Vector2 v) {
+      return At((int)v.x, (int)v.y);
+   }
+
+   public static T Remove(Vector2 v) {
+      return Remove((int)v.x, (int)v.y);
+   }
 }

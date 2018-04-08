@@ -1,0 +1,19 @@
+
+A Factory Step
+
+for each force machine:
+  record force on target crate group
+
+for each crate group:
+  for each force type:
+    remove opposing forces
+  try to move with force type priority:
+    rotator
+    pusher (checking sensors & wires)
+    conveyor & generator
+  and force direction priority:
+    majority forces
+    majority forces with previous direction included 
+
+for each welder:
+  weld

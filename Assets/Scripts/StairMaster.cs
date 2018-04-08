@@ -19,17 +19,30 @@ public class StairMaster : MonoBehaviour {
 	void Update () {
       if (!running) Run();
 		// call step methods for each machine
-      switch (stepCount % STEP_SIZE) {
-         case 0:
-            Debug.Log("START FACTORY STEP");
-            StepGenerators();
-            break;
-         default:
-            break;
+      if (stepCount % STEP_SIZE == 0) {
+         OnStepStart();
+         ApplyForces();
+         OnStepEnd();
       }
-
       stepCount++;
 	}
+
+   private void OnStepStart() {
+      Action<Machine> onStart = (machine) => machine.OnStepStart();
+      Machines.ForEach(onStart); 
+   }
+
+   private void ApplyForces() {
+      Action<CrateGroup> applyForces = (group) => group.ApplyForces();
+      Crates.ForEachGroup(applyForces);
+   }
+
+   private void OnStepEnd() {
+      Action<Machine> onStepEndM = (machine) => machine.OnStepEnd();
+      Machines.ForEach(onStepEndM);
+      Action<Crate> onStepEndC = (crate) => crate.OnStepEnd();
+      Crates.ForEach(onStepEndC);
+   }
 
    private void StepGenerators() {
       foreach (Generator gen in generators) {

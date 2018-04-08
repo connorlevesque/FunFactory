@@ -11,8 +11,7 @@ public class Machine : GridThing {
       isObstacle = true;
 		Machines.Add(this);
 	}
-	
-	void Update () {
-		
-	}
+
+   public virtual void OnStepStart() {}
+   public virtual void OnStepEnd() {}
 }

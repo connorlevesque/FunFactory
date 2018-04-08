@@ -1,0 +1,14 @@
+Machines
+
+fixed:
+  generator
+  painter
+  wall
+
+placable:
+  conveyor belt
+  rotator
+  pusher
+  sensor
+  wire
+  welder
