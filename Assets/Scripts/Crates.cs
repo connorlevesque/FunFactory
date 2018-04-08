@@ -11,10 +11,7 @@ public class Crates : GridOf<Crate> {
       List<CrateGroup> groups = new List<CrateGroup>();
       Action<Crate> addGroup = (crate) => {
          bool alreadyAdded = groups.Contains(crate.group);
-         Debug.Log("1");
-         if (!alreadyAdded) {
-            groups.Add(crate.group);
-         }
+         if (!alreadyAdded) groups.Add(crate.group);
       };
       ForEach(addGroup);
       return groups;

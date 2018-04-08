@@ -9,7 +9,6 @@ public class Crate : GridThing {
 
    public override void Start() {
       base.Start();
-      group.crates.Add(this);
       //Debug.LogFormat("Crate created at {0}", xy);
       //Crates.Add(this);
    }
@@ -31,14 +30,14 @@ public class Crate : GridThing {
    }
 
    public void Move(Vector2 direction) {
-      hasMoved = true;
-      Vector2 target = xy + direction;
-      Crate targetCrate = Crates.At(target);
-      if (targetCrate) targetCrate.Move(direction);
-
       Crates.Remove(x,y);
+      xy += direction;
+      Crate targetCrate = Crates.At(xy);
+      if (targetCrate) targetCrate.Move(direction);
+      Crates.Add(this);
+      hasMoved = true;
+
       Action whenFinished = () => {
-         xy = target;
          transform.position = xy;
          Debug.LogFormat("  transform is {0}", transform.position);
          Crates.Add(this);

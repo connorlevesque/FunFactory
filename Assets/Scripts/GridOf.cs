@@ -38,7 +38,8 @@ public class GridOf<T> where T : GridThing {
 
    public static void Add(T t) {
       if (ElementAt(t.x, t.y)) {
-         string message = string.Format("Cannot add machine at position {0}", t.xy);
+         string type = t.GetType().ToString();
+         string message = string.Format("Cannot add {0} at position {1}", type, t.xy);
          throw new ArgumentException(message);
       }
       instance.ts[t.x, t.y] = t;

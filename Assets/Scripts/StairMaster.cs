@@ -42,6 +42,8 @@ public class StairMaster : MonoBehaviour {
       Machines.ForEach(onStepEndM);
       Action<Crate> onStepEndC = (crate) => crate.OnStepEnd();
       Crates.ForEach(onStepEndC);
+      Action<CrateGroup> onStepEndG = (group) => group.OnStepEnd();
+      Crates.ForEachGroup(onStepEndG);
    }
 
    private void StepGenerators() {

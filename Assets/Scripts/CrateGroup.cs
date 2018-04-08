@@ -8,7 +8,7 @@ public class CrateGroup {
    public int spin = 0;
    public Vector2 pusherForce = Vector2.zero;
    public Vector2 netForce = Vector2.zero;
-   public Vector2 lastForce = Vector2.zero;
+   public Vector2 lastDirection = Vector2.zero;
 
    public void ApplyForces() {
       if (spin != 0) {
@@ -33,15 +33,22 @@ public class CrateGroup {
       foreach (Crate crate in crates) {
          crate.Move(direction);
       }
+      lastDirection = direction;
    }
 
    public Vector2 DirectionFromVectorForce(Vector2 force) {
       if (force == Vector2.zero) return Vector2.zero;
-      if (Math.Abs(force.x) == Math.Abs(force.y)) force += lastForce;
+      if (Math.Abs(force.x) == Math.Abs(force.y)) force += lastDirection;
       if (Math.Abs(force.x) > Math.Abs(force.y)) {
          return (force.x > 0) ? Vector2.right : Vector2.left;
       } else {
          return (force.y > 0) ? Vector2.up : Vector2.down;
       } 
+   }
+
+   public void OnStepEnd() {
+      spin = 0;
+      pusherForce = Vector2.zero;
+      netForce = Vector2.zero;
    }
 }
