@@ -74,7 +74,6 @@ public class GridOf<T> where T : GridThing {
       return InBounds((int)v.x, (int)v.y);
    }
 
-
    public static bool ElementAt(Vector2 v) {
       return ElementAt((int)v.x, (int)v.y);
    }

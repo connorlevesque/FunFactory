@@ -23,7 +23,6 @@ public class CrateGroup {
 
    public bool CanMove(Vector2 direction) {
       foreach (Crate crate in crates) {
-         Debug.LogFormat("CanMove crate at {0} = {1}", crate.xy, crate.CanMove(direction));
          if (!crate.CanMove(direction)) return false;
       }
       return true;

@@ -30,28 +30,30 @@ public class Crate : GridThing {
    }
 
    public void Move(Vector2 direction) {
-      Crates.Remove(x,y);
-      xy += direction;
-      Crate targetCrate = Crates.At(xy);
+      Debug.LogFormat("Moving crate at {0} in direction {1}", xy, direction);
+      Vector2 target = xy + direction;
+      bool offGrid = !Crates.InBounds(target);
+      if (offGrid) Destroy(this.gameObject);
+
+      Crate targetCrate = Crates.At(target);
       if (targetCrate) targetCrate.Move(direction);
+
+      Crates.Remove(xy);
+      xy = target;
       Crates.Add(this);
       hasMoved = true;
 
-      Action whenFinished = () => {
-         transform.position = xy;
-         Debug.LogFormat("  transform is {0}", transform.position);
-         Crates.Add(this);
-      };
-      StartCoroutine(AnimateMotion(direction, whenFinished));
+      //StartCoroutine(AnimateMove(direction));
+      transform.position = xy;
    }
 
-   private IEnumerator AnimateMotion(Vector2 direction, Action whenFinished) {
+   private IEnumerator AnimateMove(Vector2 direction) {
       int frames = 10;
       for (int i = 0; i < frames; i++) {
          transform.position += (Vector3)(direction / frames);
          yield return new WaitForSeconds(.05f / frames);
       }
-      whenFinished();
+      //transform.position = xy;
    }
 
    public void OnStepEnd() {

@@ -16,6 +16,7 @@ public class Generator : Machine {
    }
 
    public Crate MakeCrate() {
+      Debug.Log("Making crate");
       GameObject crateGO = Instantiate(cratePrefab, xy, Quaternion.identity);
       Crate crate = crateGO.GetComponent<Crate>();
       crate.xy = xy;
@@ -26,8 +27,8 @@ public class Generator : Machine {
    }
 
    public override void OnStepEnd() {
-      // Crate crate = Crates.At(x,y);
-      // bool occupied = crate != null;
-      // if (occupied) Destroy(crate.gameObject);
+      Crate crate = Crates.At(x,y);
+      bool occupied = crate != null;
+      if (occupied) Destroy(crate.gameObject);
    }
 }
