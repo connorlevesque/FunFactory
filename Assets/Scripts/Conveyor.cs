@@ -13,6 +13,6 @@ public class Conveyor : Machine {
 
    public override void OnStepStart() {
       Crate crate = Crates.At(x,y);
-      crate.group.netForce += direction;
+      if (crate) crate.group.netForce += direction;
    }
 }

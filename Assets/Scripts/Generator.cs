@@ -6,14 +6,22 @@ public class Generator : Machine {
 
    public GameObject cratePrefab;
    public Vector2 direction;
+   public int stepsPerCrate = 2;
+   private int stepsSinceCrate;
 
 	public override void Start() {
       base.Start();
+      stepsSinceCrate = stepsPerCrate;
 	}
 
    public override void OnStepStart() {
       DestroyUnmovedCrate();
-      MakeCrate();
+      if (stepsSinceCrate >= stepsPerCrate) {
+         MakeCrate();
+         stepsSinceCrate = 0;
+      } else {
+         stepsSinceCrate++;
+      }
    }
 
    public Crate MakeCrate() {
