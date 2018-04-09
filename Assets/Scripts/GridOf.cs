@@ -51,6 +51,13 @@ public class GridOf<T> where T : GridThing {
       return removed;
    }
 
+   public static void Log() {
+      ForEach((t) => {
+         string type = t.GetType().ToString();
+         Debug.LogFormat("{0} at {1}", type, t.xy);
+      });
+   }
+
    public static void ForEach(Action<T> action) {
       for (int y = 0; y < Height(); y++) {
          for (int x = 0; x < Width(); x++) {

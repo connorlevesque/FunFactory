@@ -5,9 +5,16 @@ using UnityEngine;
 
 public class GridThing : MonoBehaviour {
 
-   public Vector2 xy;
-      public int x {get{return (int)xy.x;}}
-      public int y {get{return (int)xy.y;}} 
+   public Vector2 _xy;
+   public Vector2 xy {
+      get{ return _xy; }
+      set{
+         //Debug.LogFormat("Setting xy to {0}", value);
+         _xy = value;
+      }
+   }
+      public int x {get{ return (int)xy.x; }}
+      public int y {get{ return (int)xy.y; }} 
    public Vector2 RoundedPosition { 
       get {
          float roundedX = (float) Math.Round(transform.position.x);
@@ -19,9 +26,5 @@ public class GridThing : MonoBehaviour {
 
 	public virtual void Start() {
       xy = RoundedPosition;
-	}
-	
-	void Update() {
-		
 	}
 }

@@ -8,20 +8,18 @@ public class Crate : GridThing {
    public bool hasMoved = false;
 
    public override void Start() {
-      base.Start();
-      //Debug.LogFormat("Crate created at {0}", xy);
-      //Crates.Add(this);
+      // BEWARE: unpredictable execution with respect to animations !!!
    }
 
    public bool CanMove(Vector2 direction) {
       if (hasMoved) return false;
       Vector2 target = xy + direction;
-      bool offGrid = Crates.InBounds(target);
+      bool offGrid = !Crates.InBounds(target);
       if (offGrid) return true;
 
       Machine targetMachine = Machines.At(target);
-      bool blocked_by_obstacle = targetMachine && targetMachine.isObstacle;
-      if (blocked_by_obstacle) return false;
+      bool blockedByObstacle = targetMachine && targetMachine.isObstacle;
+      if (blockedByObstacle) return false;
 
       Crate targetCrate = Crates.At(target);
       if (!targetCrate) return true;
@@ -30,33 +28,43 @@ public class Crate : GridThing {
    }
 
    public void Move(Vector2 direction) {
-      Debug.LogFormat("Moving crate at {0} in direction {1}", xy, direction);
+      //Debug.LogFormat("Moving crate at {0} in direction {1}", xy, direction);
       Vector2 target = xy + direction;
       bool offGrid = !Crates.InBounds(target);
-      if (offGrid) Destroy(this.gameObject);
+      if (offGrid) {
+         FallOffGrid(target, direction);
+         return;
+      }
 
       Crate targetCrate = Crates.At(target);
-      if (targetCrate) targetCrate.Move(direction);
+      if (targetCrate && targetCrate != this) targetCrate.Move(direction);
 
       Crates.Remove(xy);
       xy = target;
       Crates.Add(this);
       hasMoved = true;
-
-      //StartCoroutine(AnimateMove(direction));
-      transform.position = xy;
+      StartCoroutine(AnimateMove(target, direction));
    }
 
-   private IEnumerator AnimateMove(Vector2 direction) {
+   private void FallOffGrid(Vector2 destination, Vector2 direction) {
+      Crates.Remove(xy);
+      hasMoved = true;
+      bool destroyAfter = true;
+      StartCoroutine(AnimateMove(destination, direction, destroyAfter));
+   }
+
+   private IEnumerator AnimateMove(Vector2 destination, Vector2 direction, bool destroyAfter=false) {
       int frames = 10;
+      float animationTime = StairMaster.STEP_SIZE - 0.02f;
       for (int i = 0; i < frames; i++) {
          transform.position += (Vector3)(direction / frames);
-         yield return new WaitForSeconds(.05f / frames);
+         yield return new WaitForSeconds(animationTime / frames);
       }
-      //transform.position = xy;
+      transform.position = destination;
+      if (destroyAfter) Destroy(this.gameObject);
    }
 
-   public void OnStepEnd() {
+   public void OnStepStart() {
       hasMoved = false;
    }
 }

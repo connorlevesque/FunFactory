@@ -12,23 +12,26 @@ public class Generator : Machine {
 	}
 
    public override void OnStepStart() {
+      DestroyUnmovedCrate();
       MakeCrate();
    }
 
    public Crate MakeCrate() {
-      Debug.Log("Making crate");
       GameObject crateGO = Instantiate(cratePrefab, xy, Quaternion.identity);
       Crate crate = crateGO.GetComponent<Crate>();
-      crate.xy = xy;
+      crate.xy = crate.RoundedPosition;
       crate.group.crates.Add(crate);
       crate.group.netForce += direction;
       Crates.Add(crate);
       return crate;
    }
 
-   public override void OnStepEnd() {
-      Crate crate = Crates.At(x,y);
+   public void DestroyUnmovedCrate() {
+      Crate crate = Crates.At(xy);
       bool occupied = crate != null;
-      if (occupied) Destroy(crate.gameObject);
+      if (occupied) {
+         Crates.Remove(xy);
+         Destroy(crate.gameObject);
+      }
    }
 }

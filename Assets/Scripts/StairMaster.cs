@@ -5,46 +5,47 @@ using UnityEngine;
 
 public class StairMaster : MonoBehaviour {
 
-   public const int STEP_SIZE = 50;
-   private int stepCount = 0;
+   public const float STEP_SIZE = 0.5f;
+   private float stepTime;
    private bool running = false;
 
    private List<Generator> generators = new List<Generator>();
 
    void Run() {
       generators = GetGenerators();
+      Machines.Log();
       running = true;
    }
 
 	void Update () {
       if (!running) Run();
 		// call step methods for each machine
-      if (stepCount % STEP_SIZE == 0) {
+      if (IsNewStep()) {
          Debug.Log("Step");
          OnStepStart();
          ApplyForces();
-         OnStepEnd();
       }
-      stepCount++;
 	}
 
+   private bool IsNewStep() {
+      stepTime += Time.deltaTime;
+      if (stepTime > STEP_SIZE) {
+         stepTime = 0;
+         return true;
+      } else {
+         return false;
+      }
+   }
+
    private void OnStepStart() {
-      Action<Machine> onStart = (machine) => machine.OnStepStart();
-      Machines.ForEach(onStart); 
+      Crates.ForEach((crate) => crate.OnStepStart());
+      Crates.ForEachGroup((group) => group.OnStepStart());
+      Machines.ForEach((machine) => machine.OnStepStart()); 
    }
 
    private void ApplyForces() {
       Action<CrateGroup> applyForces = (group) => group.ApplyForces();
       Crates.ForEachGroup(applyForces);
-   }
-
-   private void OnStepEnd() {
-      Action<Machine> onStepEndM = (machine) => machine.OnStepEnd();
-      Machines.ForEach(onStepEndM);
-      Action<Crate> onStepEndC = (crate) => crate.OnStepEnd();
-      Crates.ForEach(onStepEndC);
-      Action<CrateGroup> onStepEndG = (group) => group.OnStepEnd();
-      Crates.ForEachGroup(onStepEndG);
    }
 
    private void StepGenerators() {
@@ -56,10 +57,7 @@ public class StairMaster : MonoBehaviour {
    private List<Generator> GetGenerators() {
       List<Generator> list = new List<Generator>();
       Action<Machine> addGenerator = (machine) => {
-         if (machine is Generator) {
-            list.Add((Generator)machine);
-            Debug.LogFormat("Generator at {0},{1}", machine.x, machine.y);
-         }
+         if (machine is Generator) list.Add((Generator)machine);
       };
       Machines.ForEach(addGenerator);
       return list;

@@ -13,5 +13,4 @@ public class Machine : GridThing {
 	}
 
    public virtual void OnStepStart() {}
-   public virtual void OnStepEnd() {}
 }
