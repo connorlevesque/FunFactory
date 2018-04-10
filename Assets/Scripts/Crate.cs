@@ -46,7 +46,7 @@ public class Crate : GridThing {
    }
 
    public void Move(Vector2 direction) {
-      if (hasMoved) return;
+      if (hasMoved || direction == Vector2.zero) return;
       hasMoved = true;
       Vector2 target = xy + direction;
       bool offGrid = !Crates.InBounds(target);

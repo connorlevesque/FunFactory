@@ -17,17 +17,21 @@ public class CrateGroup {
          TryMoveFromForce(pusherForce);
       } else if (netForce != Vector2.zero) {
          TryMoveFromForce(netForce);
-      }  
+      } else {
+         lastDirection = Vector2.zero;
+      }
    }
 
    public void TryMoveFromForce(Vector2 force) {
       Vector2[] directions = DirectionsFromVectorForce(force);
       bool canMovePrimaryDir = directions[0] != Vector2.zero && CanMove(directions[0]);
+      bool canMoveSecondaryDir = directions[1] != Vector2.zero && CanMove(directions[1]);
       if (canMovePrimaryDir) {
          Move(directions[0]);
+      } else if (canMoveSecondaryDir) {
+         Move(directions[1]);
       } else {
-         bool canMoveSecondaryDir = directions[1] != Vector2.zero && CanMove(directions[1]);
-         if (canMoveSecondaryDir) Move(directions[1]);
+         lastDirection = Vector2.zero;
       }
    }
 
@@ -66,6 +70,7 @@ public class CrateGroup {
       spin = 0;
       pusherForce = Vector2.zero;
       netForce = Vector2.zero;
+
    }
 
    public CrateGroup() {
