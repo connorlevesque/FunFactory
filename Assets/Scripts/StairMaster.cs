@@ -13,7 +13,6 @@ public class StairMaster : MonoBehaviour {
 
    void Run() {
       generators = GetGenerators();
-      Machines.Log();
       running = true;
    }
 
@@ -21,7 +20,7 @@ public class StairMaster : MonoBehaviour {
       if (!running) Run();
 		// call step methods for each machine
       if (IsNewStep()) {
-         Debug.Log("Step");
+         Debug.Log("----------STEP----------");
          OnStepStart();
          ApplyForces();
       }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class CrateGroup {
   
-   public List<Crate> crates = new List<Crate>();
+   public List<Crate> crates;
    public int spin = 0;
    public Vector2 pusherForce = Vector2.zero;
    public Vector2 netForce = Vector2.zero;
@@ -17,7 +17,7 @@ public class CrateGroup {
 
       } else if (netForce != Vector2.zero) {
          Vector2 direction = DirectionFromVectorForce(netForce);
-         if (CanMove(direction)) Move(direction);
+         if (direction != Vector2.zero && CanMove(direction)) Move(direction);
       }
    }
 
@@ -29,6 +29,10 @@ public class CrateGroup {
    }
 
    public void Move(Vector2 direction) {
+      foreach (Crate crate in crates) {
+         Debug.LogFormat("  {0}", crate.xy);
+      }
+
       foreach (Crate crate in crates) {
          crate.Move(direction);
       }
@@ -49,5 +53,9 @@ public class CrateGroup {
       spin = 0;
       pusherForce = Vector2.zero;
       netForce = Vector2.zero;
+   }
+
+   public CrateGroup() {
+      crates = new List<Crate>();
    }
 }

@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\Machines.cs" />
      <Compile Include="Assets\Scripts\StairMaster.cs" />
      <Compile Include="Assets\Scripts\Wall.cs" />
+     <Compile Include="Assets\Scripts\Welder.cs" />
      <None Include="Assets\Notes\Machines.txt" />
      <None Include="Assets\Notes\OrderOfOps.txt" />
      <None Include="Assets\Notes\CrateGroups.txt" />

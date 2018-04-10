@@ -28,7 +28,10 @@ public class Generator : Machine {
       GameObject crateGO = Instantiate(cratePrefab, xy, Quaternion.identity);
       Crate crate = crateGO.GetComponent<Crate>();
       crate.xy = crate.RoundedPosition;
+      crate.group = new CrateGroup();
+      crate.group.crates = new List<Crate>();
       crate.group.crates.Add(crate);
+      //Debug.LogFormat("group count = {0}", crate.group.crates.Count);
       crate.group.netForce += direction;
       Crates.Add(crate);
       return crate;

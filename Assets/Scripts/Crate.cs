@@ -4,7 +4,7 @@ using System.Collections;
 
 public class Crate : GridThing {
 
-   public CrateGroup group = new CrateGroup();
+   public CrateGroup group;
    public bool hasMoved = false;
 
    public override void Start() {
@@ -28,6 +28,8 @@ public class Crate : GridThing {
    }
 
    public void Move(Vector2 direction) {
+      if (hasMoved) return;
+      hasMoved = true;
       //Debug.LogFormat("Moving crate at {0} in direction {1}", xy, direction);
       Vector2 target = xy + direction;
       bool offGrid = !Crates.InBounds(target);
@@ -42,7 +44,6 @@ public class Crate : GridThing {
       Crates.Remove(xy);
       xy = target;
       Crates.Add(this);
-      hasMoved = true;
       StartCoroutine(AnimateMove(target, direction));
    }
 
