@@ -48,14 +48,16 @@ public class CrateGroup {
    public Vector2[] DirectionsFromVectorForce(Vector2 force) {
       Vector2[] dirs = new Vector2[] {Vector2.zero, Vector2.zero};
       if (force == Vector2.zero) return dirs;
+      Vector2 xPart = new Vector2(force.x,0);
+      Vector2 yPart = new Vector2(0,force.y);
       
       if (Math.Abs(force.x) == Math.Abs(force.y)) force += lastDirection;
       if (Math.Abs(force.x) > Math.Abs(force.y)) {
-         dirs[0] = (force.x > 0) ? Vector2.right : Vector2.left;
-         dirs[1] = (force.y > 0) ? Vector2.up : Vector2.down;
+         dirs[0] = xPart / xPart.magnitude;
+         dirs[1] = yPart / yPart.magnitude;
       } else {
-         dirs[0] = (force.y > 0) ? Vector2.up : Vector2.down;
-         dirs[1] = (force.x > 0) ? Vector2.right : Vector2.left;
+         dirs[0] = yPart / yPart.magnitude;
+         dirs[1] = xPart / xPart.magnitude;
       } 
       return dirs;
    }
