@@ -20,7 +20,7 @@ public class StairMaster : MonoBehaviour {
       if (!running) Run();
 		// call step methods for each machine
       if (IsNewStep()) {
-         Debug.Log("----------STEP----------");
+         //Debug.Log("----------STEP----------");
          OnStepStart();
          ApplyForces();
       }

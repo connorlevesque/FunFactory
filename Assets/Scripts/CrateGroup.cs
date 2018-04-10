@@ -14,7 +14,8 @@ public class CrateGroup {
       if (spin != 0) {
 
       } else if (pusherForce != Vector2.zero) {
-
+         Vector2 direction = DirectionFromVectorForce(pusherForce);
+         if (direction != Vector2.zero && CanMove(direction)) Move(direction);
       } else if (netForce != Vector2.zero) {
          Vector2 direction = DirectionFromVectorForce(netForce);
          if (direction != Vector2.zero && CanMove(direction)) Move(direction);
@@ -29,10 +30,6 @@ public class CrateGroup {
    }
 
    public void Move(Vector2 direction) {
-      foreach (Crate crate in crates) {
-         Debug.LogFormat("  {0}", crate.xy);
-      }
-
       foreach (Crate crate in crates) {
          crate.Move(direction);
       }

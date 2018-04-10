@@ -21,16 +21,33 @@ public class Crate : GridThing {
       bool blockedByObstacle = targetMachine && targetMachine.isObstacle;
       if (blockedByObstacle) return false;
 
+      bool blockedByPusherArm = CheckPusherArms(target);
+      if (blockedByPusherArm) return false;
+
       Crate targetCrate = Crates.At(target);
       if (!targetCrate) return true;
       if (group.crates.Contains(targetCrate)) return true;
       return targetCrate.group.CanMove(direction);
    }
 
+   private bool CheckPusherArms(Vector2 target) {
+      bool blockedByPusherArm = false;
+      Action<Machine> checkPusherArm = (machine) => {
+         if (machine is Pusher) {
+            Pusher pusher = (Pusher)machine;
+            Vector2 reachSquare = pusher.xy + pusher.direction;
+            if (pusher.extended && reachSquare == target) {
+               blockedByPusherArm = true;
+            }
+         }
+      };
+      Machines.ForEach(checkPusherArm);
+      return blockedByPusherArm;
+   }
+
    public void Move(Vector2 direction) {
       if (hasMoved) return;
       hasMoved = true;
-      //Debug.LogFormat("Moving crate at {0} in direction {1}", xy, direction);
       Vector2 target = xy + direction;
       bool offGrid = !Crates.InBounds(target);
       if (offGrid) {
