@@ -14,11 +14,20 @@ public class CrateGroup {
       if (spin != 0) {
 
       } else if (pusherForce != Vector2.zero) {
-         Vector2 direction = DirectionFromVectorForce(pusherForce);
-         if (direction != Vector2.zero && CanMove(direction)) Move(direction);
+         TryMoveFromForce(pusherForce);
       } else if (netForce != Vector2.zero) {
-         Vector2 direction = DirectionFromVectorForce(netForce);
-         if (direction != Vector2.zero && CanMove(direction)) Move(direction);
+         TryMoveFromForce(netForce);
+      }  
+   }
+
+   public void TryMoveFromForce(Vector2 force) {
+      Vector2[] directions = DirectionsFromVectorForce(force);
+      bool canMovePrimaryDir = directions[0] != Vector2.zero && CanMove(directions[0]);
+      if (canMovePrimaryDir) {
+         Move(directions[0]);
+      } else {
+         bool canMoveSecondaryDir = directions[1] != Vector2.zero && CanMove(directions[1]);
+         if (canMoveSecondaryDir) Move(directions[1]);
       }
    }
 
@@ -36,14 +45,19 @@ public class CrateGroup {
       lastDirection = direction;
    }
 
-   public Vector2 DirectionFromVectorForce(Vector2 force) {
-      if (force == Vector2.zero) return Vector2.zero;
+   public Vector2[] DirectionsFromVectorForce(Vector2 force) {
+      Vector2[] dirs = new Vector2[] {Vector2.zero, Vector2.zero};
+      if (force == Vector2.zero) return dirs;
+      
       if (Math.Abs(force.x) == Math.Abs(force.y)) force += lastDirection;
       if (Math.Abs(force.x) > Math.Abs(force.y)) {
-         return (force.x > 0) ? Vector2.right : Vector2.left;
+         dirs[0] = (force.x > 0) ? Vector2.right : Vector2.left;
+         dirs[1] = (force.y > 0) ? Vector2.up : Vector2.down;
       } else {
-         return (force.y > 0) ? Vector2.up : Vector2.down;
+         dirs[0] = (force.y > 0) ? Vector2.up : Vector2.down;
+         dirs[1] = (force.x > 0) ? Vector2.right : Vector2.left;
       } 
+      return dirs;
    }
 
    public void OnStepStart() {
