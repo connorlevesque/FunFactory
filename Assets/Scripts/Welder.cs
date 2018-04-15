@@ -22,12 +22,11 @@ public class Welder : Machine {
    }
 
    private void Weld(List<CrateGroup> weldGroups) {
-      CrateGroup newGroup = new CrateGroup();
+      if (weldGroups.Count <= 0) return;
+      CrateGroup newGroup = weldGroups[0];
+      weldGroups.RemoveAt(0);
       foreach (CrateGroup oldGroup in weldGroups) {
-         newGroup.crates.AddRange(oldGroup.crates);
-      }
-      foreach (Crate crate in newGroup.crates) {
-         crate.group = newGroup;
+         newGroup.Merge(oldGroup);
       }
    }
 

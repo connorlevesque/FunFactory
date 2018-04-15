@@ -70,10 +70,27 @@ public class CrateGroup {
       spin = 0;
       pusherForce = Vector2.zero;
       netForce = Vector2.zero;
+   }
 
+   public void Merge(CrateGroup other) {
+      crates.AddRange(other.crates);
+      foreach (Crate crate in other.crates) {
+         crate.group = this;
+      }
+      // combine spin here
+      pusherForce += other.pusherForce;
+      netForce += other.netForce;
    }
 
    public CrateGroup() {
       crates = new List<Crate>();
+   }
+
+   public void LogForces() {
+      Debug.Log("Forces:");
+      Debug.LogFormat("  spin        = {0}", spin);
+      Debug.LogFormat("  pusherForce = {0}", pusherForce);
+      Debug.LogFormat("  netForce    = {0}", netForce);
+      Debug.LogFormat("  lastDir     = {0}", lastDirection);
    }
 }

@@ -10,7 +10,6 @@ public class GridOf<T> where T : GridThing {
    public int height;
    private T[,] ts;
 
-
    public static int Width() {
       return instance.width;
    }
