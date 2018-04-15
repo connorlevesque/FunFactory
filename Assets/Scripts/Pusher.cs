@@ -10,7 +10,7 @@ public class Pusher : Machine {
 
    public Sprite spriteExtended;
    public Sprite spriteRetracted;
-   private SpriteRenderer renderer;
+   private new SpriteRenderer renderer;
 
    private static Vector2[] cardinalDirections = new Vector2[]
       { Vector2.up, Vector2.down, Vector2.left, Vector2.right };

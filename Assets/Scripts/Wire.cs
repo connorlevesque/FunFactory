@@ -17,6 +17,8 @@ public class Wire : Machine {
 
    private void Connect() {
       foreach (Vector2 cardinal in cardinalDirections) {
+         bool offGrid = !Machines.InBounds(xy+cardinal);
+         if (offGrid) continue;
          Machine machine = Machines.At(xy+cardinal);
          if (machine is Wire) {
             Wire other = (Wire)machine;
