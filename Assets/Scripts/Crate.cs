@@ -1,17 +1,18 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Crate : GridThing {
 
-   public CrateGroup group;
-   public bool hasMoved = false;
+   	public CrateGroup group;
+   	public bool hasMoved = false;
 
-   public override void Start() {
+   	public override void Start() {
       // BEWARE: unpredictable execution with respect to animations !!!
-   }
+   	}
 
-   public bool CanMove(Vector2 direction) {
+   	public bool CanMove(Vector2 direction) {
       if (hasMoved) return false;
       Vector2 target = xy + direction;
       bool offGrid = !Crates.InBounds(target);
@@ -28,7 +29,50 @@ public class Crate : GridThing {
       if (!targetCrate) return true;
       if (group.crates.Contains(targetCrate)) return true;
       return targetCrate.group.CanMove(direction);
-   }
+   	}
+
+   	public bool CanRotate(Vector3 spin) {
+   		// List<Vector2> toCheck = Rotator.GetSquaresToCheck(this.xy, spin);
+   		// foreach (Vector2 p in toCheck) {
+   		// 	// Debug.Log(p);
+   		// }
+   		// ------testing:
+   		// spin = new Vector3 (10, 10, 1);
+   		// Vector2 pos = new Vector3 (10, 20);
+   		// Debug.Log("GROUP:::::::");
+   		// foreach (Crate crate in this.group.crates) {
+   		// 	Debug.Log(crate.xy);
+   		// }
+   		List<Vector2> toCheck = Rotator.GetSquaresToCheck(this.xy, spin);
+   		
+   		foreach (Vector2 target in toCheck) {
+   			Debug.LogFormat("Checking {0}",target);
+   			Machine targetMachine = Machines.At(target);
+			bool blockedByObstacle = targetMachine && targetMachine.isObstacle;
+			if (blockedByObstacle) return false;
+
+			bool blockedByPusherArm = CheckPusherArms(target);
+			if (blockedByPusherArm) return false;
+
+			Crate targetCrate = Crates.At(target);
+			if (targetCrate) {
+				if (targetCrate && !group.crates.Contains(targetCrate)) return false;
+   			}
+   		}
+   		return true;
+   	}
+
+   	public void Rotate(Vector3 spin) {
+   		if (hasMoved) return;
+   		hasMoved = true;
+   		Vector2 target = Rotator.RotateVector(this.xy, spin);
+   		Crates.Remove(xy);
+   		Vector2 direction = target - xy;
+   		xy = target;
+   		Crates.Add(this);
+   		StartCoroutine(AnimateMove(target, direction));
+
+   	}
 
    private bool CheckPusherArms(Vector2 target) {
       bool blockedByPusherArm = false;

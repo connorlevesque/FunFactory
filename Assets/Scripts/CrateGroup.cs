@@ -5,14 +5,16 @@ using System.Collections.Generic;
 public class CrateGroup {
   
    public List<Crate> crates;
-   public int spin = 0;
+   public List<Vector3> spins = new List<Vector3>();
+   // spins stores (x, y, dir); where xy is the axis of rotation and the dir is +1 (positive rotation/CCW) or -1 (neg, CW) 
    public Vector2 pusherForce = Vector2.zero;
    public Vector2 netForce = Vector2.zero;
    public Vector2 lastDirection = Vector2.zero;
 
    public void ApplyForces() {
-      if (spin != 0) {
-
+      if (spins.Count != 0) {
+         //TODO: NEEDS TO CHANGE TO SOMEHOW CHOOSE BETWEEN ROTATIONS IF MULTIPLE
+         TryRotation(spins[0]);
       } else if (pusherForce != Vector2.zero) {
          TryMoveFromForce(pusherForce);
       } else if (netForce != Vector2.zero) {
@@ -22,6 +24,26 @@ public class CrateGroup {
       }
    }
 
+   public void TryRotation(Vector3 spin) {
+      Debug.Log("TryRotation--------------");
+      
+      if (CanRotate(spin)) Rotate(spin);
+   }
+
+   public bool CanRotate(Vector3 spin) {
+      Debug.Log("CanRotate--------------");
+      foreach (Crate crate in crates) {
+         Debug.Log(crate.xy);
+         if (!crate.CanRotate(spin)) return false;
+      }
+      return true;
+   }
+
+   public void Rotate(Vector3 spin) {
+      foreach (Crate crate in crates) {
+         crate.Rotate(spin);
+      }
+   }
    public void TryMoveFromForce(Vector2 force) {
       Vector2[] directions = DirectionsFromVectorForce(force);
       bool canMovePrimaryDir = directions[0] != Vector2.zero && CanMove(directions[0]);
@@ -67,7 +89,7 @@ public class CrateGroup {
    }
 
    public void OnStepStart() {
-      spin = 0;
+      spins.Clear();
       pusherForce = Vector2.zero;
       netForce = Vector2.zero;
 
