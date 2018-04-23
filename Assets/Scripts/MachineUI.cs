@@ -15,7 +15,8 @@ public class MachineUI : MonoBehaviour {
    public GameObject wireBtn;
 
    void Start() {
-      SetupMachineButton(conveyorBtn, ()=>MachineToPlace());
+      //Conveyor conveyor = 
+      //SetupMachineButton(conveyorBtn, );
       //SetupButton(pauseBtn, ()=>Pause());
       //SetupButton(resetBtn, ()=>Reset());
    }
