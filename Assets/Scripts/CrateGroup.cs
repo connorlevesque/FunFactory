@@ -110,7 +110,6 @@ public class CrateGroup {
 
    public void LogForces() {
       Debug.Log("Forces:");
-      Debug.LogFormat("  spin        = {0}", spin);
       Debug.LogFormat("  pusherForce = {0}", pusherForce);
       Debug.LogFormat("  netForce    = {0}", netForce);
       Debug.LogFormat("  lastDir     = {0}", lastDirection);
