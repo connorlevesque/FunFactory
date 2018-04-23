@@ -7,7 +7,7 @@ public class StairMaster : MonoBehaviour {
 
    public const float STEP_SIZE = 0.5f;
    private float stepTime;
-   private bool running = false;
+   public bool running = false;
 
    private List<Generator> generators = new List<Generator>();
 
