@@ -70,7 +70,7 @@ public class Crate : GridThing {
    		Vector2 direction = target - xy;
    		xy = target;
    		Crates.Add(this);
-   		StartCoroutine(AnimateMove(target, direction));
+   		StartCoroutine(AnimateRotation(target, spin));
 
    	}
 
@@ -125,6 +125,22 @@ public class Crate : GridThing {
       transform.position = destination;
       if (destroyAfter) Destroy(this.gameObject);
    }
+
+	private IEnumerator AnimateRotation(Vector2 destination, Vector3 spin, bool destroyAfter=false) {
+		int frames = 10;
+		float animationTime = StairMaster.STEP_SIZE - 0.02f;
+		float angle = (float)((spin[2]==1) ? 90: -90)/frames;
+		for (int i = 0; i < frames; i++) {
+			Vector3 pp = new Vector3 (spin[0], spin[1], 0);
+			transform.RotateAround(pp, Vector3.forward, angle);
+			yield return new WaitForSeconds(animationTime / frames);
+		}
+		transform.position = destination;
+		if (destroyAfter) Destroy(this.gameObject);
+	}
+
+
+
 
    public void OnStepStart() {
       hasMoved = false;
