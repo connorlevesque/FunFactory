@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\Rotator.cs" />
      <Compile Include="Assets\Scripts\Sensor.cs" />
      <Compile Include="Assets\Scripts\StairMaster.cs" />
+     <Compile Include="Assets\Scripts\UI.cs" />
      <Compile Include="Assets\Scripts\Wall.cs" />
      <Compile Include="Assets\Scripts\Welder.cs" />
      <Compile Include="Assets\Scripts\Wire.cs" />

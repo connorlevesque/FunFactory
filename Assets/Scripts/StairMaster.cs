@@ -55,10 +55,9 @@ public class StairMaster : MonoBehaviour {
 
    private List<Generator> GetGenerators() {
       List<Generator> list = new List<Generator>();
-      Action<Machine> addGenerator = (machine) => {
+      Machines.ForEach((machine) => {
          if (machine is Generator) list.Add((Generator)machine);
-      };
-      Machines.ForEach(addGenerator);
+      });
       return list;
    }
 }
