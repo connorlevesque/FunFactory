@@ -46,7 +46,7 @@ public class Crate : GridThing {
    		List<Vector2> toCheck = Rotator.GetSquaresToCheck(this.xy, spin);
    		
    		foreach (Vector2 target in toCheck) {
-   			Debug.LogFormat("Checking {0}",target);
+   			// Debug.LogFormat("Checking {0}",target);
    			Machine targetMachine = Machines.At(target);
 			bool blockedByObstacle = targetMachine && targetMachine.isObstacle;
 			if (blockedByObstacle) return false;
@@ -90,6 +90,7 @@ public class Crate : GridThing {
    }
 
    public void Move(Vector2 direction) {
+   		// Debug.LogFormat("Confirm: moving {0} in dir {1}", this.xy, direction);
       if (hasMoved || direction == Vector2.zero) return;
       hasMoved = true;
       Vector2 target = xy + direction;
@@ -100,7 +101,7 @@ public class Crate : GridThing {
       }
 
       Crate targetCrate = Crates.At(target);
-      if (targetCrate && targetCrate != this) targetCrate.Move(direction);
+      if (targetCrate && targetCrate != this) targetCrate.group.Move(direction);
 
       Crates.Remove(xy);
       xy = target;

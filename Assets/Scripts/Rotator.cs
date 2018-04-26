@@ -10,8 +10,7 @@ public class Rotator : Machine {
 	public override void Start() {
 		base.Start();
 		isObstacle = false;
-		// midpointCenterAlgorithm();
-		
+		// midpointCenterAlgorithm();	
 	}
 
 	public override void OnStepStart() {
@@ -26,8 +25,8 @@ public class Rotator : Machine {
   		Vector2 center = new Vector2 (spin[0], spin[1]);
   		Vector2 target = Rotator.RotateVector(xy, spin);
    		bool ccw = (spin[2] == 1) ? true : false;
-   		Debug.Log("running get squares to check");
-   		Debug.LogFormat("xy: {0}, target: {1}, ccw: {2}", xy, target, ccw);
+   		// Debug.Log("running get squares to check");
+   		// Debug.LogFormat("xy: {0}, target: {1}, ccw: {2}", xy, target, ccw);
 
    		return Rotator.InclusiveSlice(circle, xy, target, ccw);
   	}

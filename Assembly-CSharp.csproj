@@ -64,11 +64,8 @@
      <Compile Include="Assets\Scripts\Machines.cs" />
      <Compile Include="Assets\Scripts\MachineUI.cs" />
      <Compile Include="Assets\Scripts\Pusher.cs" />
-<<<<<<< HEAD
-     <Compile Include="Assets\Scripts\RunResetUI.cs" />
-=======
      <Compile Include="Assets\Scripts\Rotator.cs" />
->>>>>>> 6c9f27c6c2a3ab3163d8a4c2ea0ca5f0742d74a0
+     <Compile Include="Assets\Scripts\RunResetUI.cs" />
      <Compile Include="Assets\Scripts\Sensor.cs" />
      <Compile Include="Assets\Scripts\StairMaster.cs" />
      <Compile Include="Assets\Scripts\Wall.cs" />

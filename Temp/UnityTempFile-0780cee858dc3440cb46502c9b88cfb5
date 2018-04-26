@@ -182,6 +182,7 @@
 -define:UNITY_EDITOR_OSX
 -define:ENABLE_NATIVE_ARRAY_CHECKS
 -define:UNITY_TEAM_LICENSE
+'Assets/Scripts/Button.cs'
 'Assets/Scripts/Conveyor.cs'
 'Assets/Scripts/Crate.cs'
 'Assets/Scripts/CrateGroup.cs'
@@ -192,11 +193,12 @@
 'Assets/Scripts/GridThing.cs'
 'Assets/Scripts/Machine.cs'
 'Assets/Scripts/Machines.cs'
+'Assets/Scripts/MachineUI.cs'
 'Assets/Scripts/Pusher.cs'
 'Assets/Scripts/Rotator.cs'
+'Assets/Scripts/RunResetUI.cs'
 'Assets/Scripts/Sensor.cs'
 'Assets/Scripts/StairMaster.cs'
-'Assets/Scripts/UI.cs'
 'Assets/Scripts/Wall.cs'
 'Assets/Scripts/Welder.cs'
 'Assets/Scripts/Wire.cs'

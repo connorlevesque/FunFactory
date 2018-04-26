@@ -20,7 +20,7 @@ public class StairMaster : MonoBehaviour {
       if (!running) Run();
 		// call step methods for each machine
       if (IsNewStep()) {
-         //Debug.Log("----------STEP----------");
+         // Debug.Log("----------STEP----------");
          OnStepStart();
          ApplyForces();
       }
@@ -37,6 +37,7 @@ public class StairMaster : MonoBehaviour {
    }
 
    private void OnStepStart() {
+      // Debug.Log("===========stairmaster_start=============");
       Crates.ForEach((crate) => crate.OnStepStart());
       Crates.ForEachGroup((group) => group.OnStepStart());
       Machines.ForEach((machine) => machine.OnStepStart()); 
