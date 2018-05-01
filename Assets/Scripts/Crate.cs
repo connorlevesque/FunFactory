@@ -44,7 +44,7 @@ public class Crate : GridThing {
    		// 	Debug.Log(crate.xy);
    		// }
    		List<Vector2> toCheck = Rotator.GetSquaresToCheck(this.xy, spin);
-   		
+   		// Debug.LogFormat("Crate: Can Rotate {0}", this.xy);
    		foreach (Vector2 target in toCheck) {
    			// Debug.LogFormat("Checking {0}",target);
    			Machine targetMachine = Machines.At(target);

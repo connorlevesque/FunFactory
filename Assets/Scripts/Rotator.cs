@@ -3,8 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+
 public class Rotator : Machine {
 	public bool isCCW;
+	private static int STEPS = 50;
+	private static double ANG_STEP = 2*(Math.PI)/STEPS;
 
 
 	public override void Start() {
@@ -21,14 +24,26 @@ public class Rotator : Machine {
   	}
 
   	public static List<Vector2> GetSquaresToCheck (Vector2 xy, Vector3 spin){
-  		List<Vector2> circle = Rotator.MidpointCenterAlgorithm(xy, spin);
+  		// List<Vector2> circle = Rotator.MidpointCenterAlgorithm(xy, spin);
+  		Debug.Log("running get squares to check");
+  		double xt = (double)spin[0]-(double)xy[0];
+	   	double yt = (double)spin[1]-(double)xy[1];
+	   	double radius = Math.Sqrt(xt*xt + yt*yt);
   		Vector2 center = new Vector2 (spin[0], spin[1]);
+  		List<Vector2> circle = Rotator.MakeCircle(center, radius);
+  		// Debug.LogFormat("xy:{0}, center: {1}", xy, center);
+  		// foreach(Vector2 p in circle) {
+   			// Debug.Log(p);
+   		// }
+  		
   		Vector2 target = Rotator.RotateVector(xy, spin);
    		bool ccw = (spin[2] == 1) ? true : false;
-   		// Debug.Log("running get squares to check");
+   		
    		// Debug.LogFormat("xy: {0}, target: {1}, ccw: {2}", xy, target, ccw);
-
-   		return Rotator.InclusiveSlice(circle, xy, target, ccw);
+   		List<Vector2> a = Rotator.InclusiveSlice(circle, xy, target, ccw);
+   		
+   		// return circle; 
+   		return a;
   	}
 
   	private static List<Vector2> InclusiveSlice(List<Vector2> l, Vector2 start, Vector2 end, bool ccw) {
@@ -137,8 +152,118 @@ public class Rotator : Machine {
 	   	return buddie;
   	}
 
+	private static int Quadrent(double[] point){
+		double[] center = new double[] {Math.Round(point[0]), Math.Round(point[1])};
+		int[,] l = new int[,] {{6, 3, 0}, {7, 4, 1}, {8, 5, 2}};
+		double x = 2*(point[0] - center[0]);
+		double y = 2*(point[1] - center[1]);
+		int xr = (int) Math.Round(x, 0);
+		int yr = (int) Math.Round(y, 0);
+		int xi = xr + 1;
+		int yi = yr + 1;
+		return l[xi, yi];
+	}
 
 
+
+	private static List<Vector2> MakeCircle(Vector2 center, double radius){
+		
+		List<Vector2> buddie = new List<Vector2>();
+		for (int i=0; i <= STEPS; i++){
+			double t = ANG_STEP * i;
+			double x_0 = center[0];
+			double y_0 = center[1];
+
+			double x_t = radius*Math.Cos(t);
+			double y_t = radius*Math.Sin(t);
+			
+			double x = x_0 + x_t;
+			double y = y_0 + y_t;
+
+			int xint = (int)Math.Round(x);
+			int yint = (int)Math.Round(y);
+
+			int q = Quadrent(new double[] {x, y});
+			// switch(q)
+			if (q == 0) {
+				
+				// buddiex.append(xint)
+				// buddiey.append(yint +1)
+				buddie.Add(new Vector2(xint, yint+1));
+
+				// buddiex.append(xint - 1)
+				// buddiey.append(yint + 1)
+				buddie.Add(new Vector2(xint-1, yint+1));
+
+				// buddiex.append(xint - 1)
+				// buddiey.append(yint)
+				buddie.Add(new Vector2(xint-1, yint));
+			}
+			else if (q == 1) {
+				// buddiex.append(xint)
+				// buddiey.append(yint + 1)
+				buddie.Add(new Vector2(xint, yint+1));
+			}
+			else if (q == 2) {
+				// buddiex.append(xint)
+				// buddiey.append(yint + 1)
+				buddie.Add(new Vector2(xint, yint+1));
+
+				// buddiex.append(xint + 1)
+				// buddiey.append(yint + 1)
+				buddie.Add(new Vector2(xint+1, yint+1));
+				
+				// buddiex.append(xint + 1)
+				// buddiey.append(yint)
+				buddie.Add(new Vector2(xint+1, yint));
+			}
+			else if (q == 3) {
+				// buddiex.append(xint - 1);
+				// buddiey.append(yint);
+				buddie.Add(new Vector2(xint-1, yint));
+			}
+			else if (q == 5){
+				// buddiex.append(xint + 1)
+				// buddiey.append(yint)
+				buddie.Add(new Vector2(xint+1,yint));
+			}
+			else if (q == 6){
+				// buddiex.append(xint - 1)
+				// buddiey.append(yint)
+				buddie.Add(new Vector2(xint-1, yint));
+
+				// buddiex.append(xint - 1)
+				// buddiey.append(yint - 1)
+				buddie.Add(new Vector2(xint-1, yint-1));
+
+				// buddiex.append(xint)
+				// buddiey.append(yint - 1)
+				buddie.Add(new Vector2(xint, yint-1));
+			}
+			else if (q == 7){
+				// buddiex.append(xint)
+				// buddiey.append(yint - 1)
+				buddie.Add(new Vector2(xint, yint-1));
+			}
+			else if (q == 8){
+				// buddiex.append(xint + 1)
+				// buddiey.append(yint)
+				buddie.Add(new Vector2(xint+1,yint));
+
+				// buddiex.append(xint + 1)
+				// buddiey.append(yint - 1)
+				buddie.Add(new Vector2(xint+1, yint-1));
+
+				// buddiex.append(xint)
+				// buddiey.append(yint - 1)
+				buddie.Add(new Vector2(xint, yint-1));
+			}
+			// buddiex.append(xint)
+			// buddiey.append(yint)
+			buddie.Add(new Vector2(xint, yint));
+		}
+		return buddie;
+	}
 
 
 }
