@@ -17,7 +17,7 @@ public class Crate : GridThing {
    		for (int i = 0; i<4; i++) {
    			l[i] = IsPaintedWorldSide(i);
    		}
-   		Debug.LogFormat("worldPaint: [{0}, {1}, {2}, {3}]", l[0], l[1], l[2], l[3]);
+   		// Debug.LogFormat("worldPaint: [{0}, {1}, {2}, {3}]", l[0], l[1], l[2], l[3]);
 
    		return l;
    	}
@@ -82,7 +82,7 @@ public class Crate : GridThing {
    				break;
    		}
    		this.painted[side] = 1;
-   		Debug.LogFormat("cratePaint: [{0}, {1}, {2}, {3}]", painted[0], painted[1], painted[2], painted[3]);
+   		// Debug.LogFormat("cratePaint: [{0}, {1}, {2}, {3}]", painted[0], painted[1], painted[2], painted[3]);
    		// Debug.LogFormat("xy: {0}, ang: {1}", pos, ang);
    		paintGO.transform.Rotate(new Vector3(0, 0, ang));
    		paintGO.transform.localPosition = pos * 0.25F;

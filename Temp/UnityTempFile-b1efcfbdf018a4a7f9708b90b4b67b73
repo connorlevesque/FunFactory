@@ -187,6 +187,8 @@
 'Assets/Scripts/Crate.cs'
 'Assets/Scripts/CrateGroup.cs'
 'Assets/Scripts/Crates.cs'
+'Assets/Scripts/DropZone.cs'
+'Assets/Scripts/DropZoneGroup.cs'
 'Assets/Scripts/GameManager.cs'
 'Assets/Scripts/Generator.cs'
 'Assets/Scripts/GridOf.cs'
