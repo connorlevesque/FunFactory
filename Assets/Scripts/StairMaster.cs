@@ -5,21 +5,39 @@ using UnityEngine;
 
 public class StairMaster : MonoBehaviour {
 
-   public const float STEP_SIZE = 0.5f;
+   public float stepSize = SLOW_STEP_SIZE;
+   public const float SLOW_STEP_SIZE = 0.5f;
+   public const float FAST_STEP_SIZE = 0.3f;
    private float stepTime;
    public bool running = false;
 
    private List<Generator> generators = new List<Generator>();
 
-   void Run() {
+   public void Run() {
       generators = GetGenerators();
       running = true;
    }
 
+   public void Pause() {
+      running = false;
+   }
+
+   public bool IsSlow() {
+      return stepSize == SLOW_STEP_SIZE;
+   }
+
+   public void FastForward() {
+      stepSize = FAST_STEP_SIZE;
+   }
+
+   public void SlowDown() {
+      stepSize = SLOW_STEP_SIZE;
+   }
+
 	void Update () {
-      if (!running) Run();
+      //if (!running) Run();
 		// call step methods for each machine
-      if (IsNewStep()) {
+      if (running && IsNewStep()) {
          //Debug.Log("----------STEP----------");
          OnStepStart();
          ApplyForces();
@@ -28,7 +46,7 @@ public class StairMaster : MonoBehaviour {
 
    private bool IsNewStep() {
       stepTime += Time.deltaTime;
-      if (stepTime > STEP_SIZE) {
+      if (stepTime > stepSize) {
          stepTime = 0;
          return true;
       } else {

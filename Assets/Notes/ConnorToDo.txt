@@ -1,0 +1,14 @@
+TODO
+
+starting machine rotations are unpredictable <= fixed?
+fix sensor rotation to keep ? rightside up
+flip placed spinner
+
+calibrate fast forward with animations
+button art
+reposition buttons
+add clear confirmation popup
+
+
+
+Bug when map is too small, wrong crate groups are deleted

@@ -21,6 +21,14 @@ public class Welder : Machine {
       Weld(weldGroups);
    }
 
+   public override void Rotate(bool clockwise) {
+      direction = RotateVector(direction, clockwise);
+      Vector3 degrees = new Vector3(0,0,0);
+      degrees.z = clockwise ? -90 : 90;
+      transform.Rotate(degrees, Space.World);
+      UI.Machines.welderPrefab.transform.Rotate(degrees, Space.World);
+   }
+
    private void Weld(List<CrateGroup> weldGroups) {
       if (weldGroups.Count <= 0) return;
       CrateGroup newGroup = weldGroups[0];

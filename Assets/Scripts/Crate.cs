@@ -48,15 +48,15 @@ public class Crate : GridThing {
    		foreach (Vector2 target in toCheck) {
    			Debug.LogFormat("Checking {0}",target);
    			Machine targetMachine = Machines.At(target);
-			bool blockedByObstacle = targetMachine && targetMachine.isObstacle;
-			if (blockedByObstacle) return false;
+   			bool blockedByObstacle = targetMachine && targetMachine.isObstacle;
+   			if (blockedByObstacle) return false;
 
-			bool blockedByPusherArm = CheckPusherArms(target);
-			if (blockedByPusherArm) return false;
+   			bool blockedByPusherArm = CheckPusherArms(target);
+   			if (blockedByPusherArm) return false;
 
-			Crate targetCrate = Crates.At(target);
-			if (targetCrate) {
-				if (targetCrate && !group.crates.Contains(targetCrate)) return false;
+   			Crate targetCrate = Crates.At(target);
+   			if (targetCrate) {
+				  if (targetCrate && !group.crates.Contains(targetCrate)) return false;
    			}
    		}
    		return true;
@@ -117,7 +117,7 @@ public class Crate : GridThing {
 
    private IEnumerator AnimateMove(Vector2 destination, Vector2 direction, bool destroyAfter=false) {
       int frames = 10;
-      float animationTime = StairMaster.STEP_SIZE - 0.02f;
+      float animationTime = GameManager.StairMaster.stepSize - 0.02f;
       for (int i = 0; i < frames; i++) {
          transform.position += (Vector3)(direction / frames);
          yield return new WaitForSeconds(animationTime / frames);
@@ -128,7 +128,7 @@ public class Crate : GridThing {
 
 	private IEnumerator AnimateRotation(Vector2 destination, Vector3 spin, bool destroyAfter=false) {
 		int frames = 10;
-		float animationTime = StairMaster.STEP_SIZE - 0.02f;
+		float animationTime = GameManager.StairMaster.stepSize - 0.02f;
 		float angle = (float)((spin[2]==1) ? 90: -90)/frames;
 		for (int i = 0; i < frames; i++) {
 			Vector3 pp = new Vector3 (spin[0], spin[1], 0);

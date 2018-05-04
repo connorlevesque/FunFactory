@@ -50,6 +50,10 @@ public class GridOf<T> where T : GridThing {
       return removed;
    }
 
+   public static void RemoveAll() {
+      ForEach((t) => Remove(t.xy));
+   }
+
    public static void Log() {
       ForEach((t) => {
          string type = t.GetType().ToString();
