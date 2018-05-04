@@ -25,15 +25,14 @@ public class CrateGroup {
    }
 
    public void TryRotation(Vector3 spin) {
-      Debug.Log("TryRotation--------------");
+      // Debug.Log("TryRotation--------------");
       
       if (CanRotate(spin)) Rotate(spin);
    }
 
    public bool CanRotate(Vector3 spin) {
-      Debug.Log("CanRotate--------------");
+      // Debug.Log("CanRotate--------------");
       foreach (Crate crate in crates) {
-         Debug.Log(crate.xy);
          if (!crate.CanRotate(spin)) return false;
       }
       return true;
@@ -65,7 +64,12 @@ public class CrateGroup {
    }
 
    public void Move(Vector2 direction) {
+      // Debug.LogFormat("Moving group of {0} crates:", crates.Count);
+      // foreach(Crate c in crates) {
+      //    Debug.LogFormat("     {0}",c.xy);
+      // }
       foreach (Crate crate in crates) {
+         // Debug.LogFormat("moving {0} in dir {1}", crate.xy, direction);
          crate.Move(direction);
       }
       lastDirection = direction;
@@ -92,13 +96,26 @@ public class CrateGroup {
       spins.Clear();
       pusherForce = Vector2.zero;
       netForce = Vector2.zero;
+      
    }
 
    public void Merge(CrateGroup other) {
+      // Debug.Log("Merging:");
+      // foreach (Crate crate in crates) {
+      //    Debug.Log(crate.xy);
+      // }
       crates.AddRange(other.crates);
-      foreach (Crate crate in other.crates) {
+
+      foreach (Crate crate in crates) {
          crate.group = this;
       }
+      // Debug.Log("******New Group:");
+      // List<CrateGroup> grps = new List<CrateGroup>();
+      // foreach (Crate crate in crates) {
+      //    if (!grps.Contains(crate.group)) grps.Add(crate.group);
+      //    Debug.LogFormat("          {0}",crate.xy);
+      // }
+      // Debug.LogFormat("group contains {0} members.",crates.Count);
       // combine spin here
       pusherForce += other.pusherForce;
       netForce += other.netForce;

@@ -56,6 +56,8 @@
      <Compile Include="Assets\Scripts\Crate.cs" />
      <Compile Include="Assets\Scripts\CrateGroup.cs" />
      <Compile Include="Assets\Scripts\Crates.cs" />
+     <Compile Include="Assets\Scripts\DropZone.cs" />
+     <Compile Include="Assets\Scripts\DropZoneGroup.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Generator.cs" />
      <Compile Include="Assets\Scripts\GridOf.cs" />
@@ -63,6 +65,8 @@
      <Compile Include="Assets\Scripts\Machine.cs" />
      <Compile Include="Assets\Scripts\Machines.cs" />
      <Compile Include="Assets\Scripts\MachineUI.cs" />
+     <Compile Include="Assets\Scripts\Paint.cs" />
+     <Compile Include="Assets\Scripts\Painter.cs" />
      <Compile Include="Assets\Scripts\Pusher.cs" />
      <Compile Include="Assets\Scripts\Rotator.cs" />
      <Compile Include="Assets\Scripts\RunUI.cs" />

@@ -30,7 +30,13 @@ public class Welder : Machine {
    }
 
    private void Weld(List<CrateGroup> weldGroups) {
-      if (weldGroups.Count <= 0) return;
+      if (weldGroups.Count <= 1) return;
+      // Debug.Log("**WELD**");
+      // foreach (CrateGroup cg in weldGroups) {
+      //    foreach (Crate c in cg.crates) {
+      //       Debug.Log(c.xy);
+      //    }
+      // }
       CrateGroup newGroup = weldGroups[0];
       weldGroups.RemoveAt(0);
       foreach (CrateGroup oldGroup in weldGroups) {
@@ -51,12 +57,13 @@ public class Welder : Machine {
             if (targetCrate && adjacentCrate) {
                bool targetAlreadyAdded = weldGroups.Contains(targetCrate.group);
                if (!targetAlreadyAdded) weldGroups.Add(targetCrate.group);
-
                bool adjacentAlreadyAdded = weldGroups.Contains(adjacentCrate.group);
                if (!adjacentAlreadyAdded) weldGroups.Add(adjacentCrate.group);
             }
          }
       }
+
+      
       return weldGroups;
    }
 

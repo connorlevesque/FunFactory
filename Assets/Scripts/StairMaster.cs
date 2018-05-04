@@ -55,6 +55,7 @@ public class StairMaster : MonoBehaviour {
    }
 
    private void OnStepStart() {
+      // Debug.Log("===========stairmaster_start=============");
       Crates.ForEach((crate) => crate.OnStepStart());
       Crates.ForEachGroup((group) => group.OnStepStart());
       Machines.ForEach((machine) => machine.OnStepStart()); 
