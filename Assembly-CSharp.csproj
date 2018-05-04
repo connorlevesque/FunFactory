@@ -63,6 +63,8 @@
      <Compile Include="Assets\Scripts\Machine.cs" />
      <Compile Include="Assets\Scripts\Machines.cs" />
      <Compile Include="Assets\Scripts\MachineUI.cs" />
+     <Compile Include="Assets\Scripts\Paint.cs" />
+     <Compile Include="Assets\Scripts\Painter.cs" />
      <Compile Include="Assets\Scripts\Pusher.cs" />
      <Compile Include="Assets\Scripts\Rotator.cs" />
      <Compile Include="Assets\Scripts\RunResetUI.cs" />

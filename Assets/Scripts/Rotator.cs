@@ -8,6 +8,7 @@ public class Rotator : Machine {
 	public bool isCCW;
 	private static int STEPS = 50;
 	private static double ANG_STEP = 2*(Math.PI)/STEPS;
+	private CrateGroup lastGroup;
 
 
 	public override void Start() {
@@ -15,17 +16,31 @@ public class Rotator : Machine {
 		isObstacle = false;
 		// midpointCenterAlgorithm();	
 	}
+	
+	public void setLastGroup (CrateGroup g) {
+		this.lastGroup = g;
+	}
+	
+	public CrateGroup getLastGroup () {
+		return this.lastGroup;
+	}
 
 	public override void OnStepStart() {
+		// Debug.Log("Rotator onsttepstart");
 		Crate crate = Crates.At(xy);
 		int isCCWInt = (isCCW) ? 1:0;
 		Vector3 spin = new Vector3 (this.x, this.y, isCCWInt);
-		if (crate) crate.group.spins.Add(spin);
+		if (crate) {
+			if (crate.group != this.lastGroup) {
+			 crate.group.spins.Add(spin);
+			 this.lastGroup = crate.group;
+			}
+		}
   	}
 
   	public static List<Vector2> GetSquaresToCheck (Vector2 xy, Vector3 spin){
   		// List<Vector2> circle = Rotator.MidpointCenterAlgorithm(xy, spin);
-  		Debug.Log("running get squares to check");
+  		// Debug.Log("running get squares to check");
   		double xt = (double)spin[0]-(double)xy[0];
 	   	double yt = (double)spin[1]-(double)xy[1];
 	   	double radius = Math.Sqrt(xt*xt + yt*yt);
