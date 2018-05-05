@@ -27,6 +27,10 @@ public class DropZoneGroup {
          else if (crate.group != g) return;
       }
       Debug.Log("________accept_________");
+      foreach(Crate crate in g.crates) {
+         Crates.Remove(crate.xy);
+         GridThing.Destroy(crate.gameObject);
+      }
 
    }
 

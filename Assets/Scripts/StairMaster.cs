@@ -37,10 +37,12 @@ public class StairMaster : MonoBehaviour {
 	void Update () {
       //if (!running) Run();
 		// call step methods for each machine
+         // Debug.Log("----------STEP----------");
+
       if (running && IsNewStep()) {
-         //Debug.Log("----------STEP----------");
          OnStepStart();
          ApplyForces();
+
       }
 	}
 
