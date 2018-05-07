@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class Crate : GridThing {
 	public GameObject paintPrefab;
 	public GameObject dotPrefab;
-	private bool dot = true;
+	private bool dot = false;
    	public CrateGroup group;
    	public bool hasMoved = false;
    	private int[] painted = new int[] {0, 0, 0, 0};
@@ -168,10 +168,14 @@ public class Crate : GridThing {
    		if (hasMoved) return;
    		hasMoved = true;
    		Vector2 target = Rotator.RotateVector(this.xy, spin);
-   		Crates.Remove(xy);
+   		// Crates.Remove(xy);
    		Vector2 direction = target - xy;
    		xy = target;
    		Crates.Add(this);
+   		// try {Crates.Add(this);}
+   		// catch (ArgumentException) {
+   			// Debug.Log("gridofCrates doesn't register this move correctly");
+   		// }
    		StartCoroutine(AnimateRotation(target, spin));
 
    	}

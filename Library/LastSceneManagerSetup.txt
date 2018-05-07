@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/MY SCENE DO NOT ENTER (demo).unity
+- path: Assets/Scenes/MY SCENE DO NOT ENTER.unity
   isLoaded: 1
   isActive: 1

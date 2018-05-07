@@ -40,6 +40,9 @@ public class CrateGroup {
 
    public void Rotate(Vector3 spin) {
       foreach (Crate crate in crates) {
+         Crates.Remove(crate.xy);
+      }
+      foreach (Crate crate in crates) {
          crate.Rotate(spin);
       }
    }
