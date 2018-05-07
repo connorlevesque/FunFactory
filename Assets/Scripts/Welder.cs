@@ -8,6 +8,7 @@ public class Welder : Machine {
 
    public Vector2 direction;
    public bool hasWelded = false;
+   public bool print = false;
    public static List<Vector2> weldSquares;
    private static Vector2[] cardinalDirections = new Vector2[]
       { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
@@ -31,7 +32,7 @@ public class Welder : Machine {
 
    private void Weld(List<CrateGroup> weldGroups) {
       if (weldGroups.Count <= 1) return;
-      // Debug.Log("**WELD**");
+      if (print) Debug.Log("**WELD**");
       // foreach (CrateGroup cg in weldGroups) {
       //    foreach (Crate c in cg.crates) {
       //       Debug.Log(c.xy);

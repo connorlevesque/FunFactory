@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 public class Crate : GridThing {
 	public GameObject paintPrefab;
+	public GameObject dotPrefab;
+	private bool dot = true;
    	public CrateGroup group;
    	public bool hasMoved = false;
    	private int[] painted = new int[] {0, 0, 0, 0};
@@ -129,19 +131,34 @@ public class Crate : GridThing {
    		// 	Debug.Log(crate.xy);
    		// }
    		List<Vector2> toCheck = Rotator.GetSquaresToCheck(this.xy, spin);
-   		// Debug.LogFormat("Crate: Can Rotate {0}", this.xy);
+   		if (dot){
+   			foreach(Vector2 v in toCheck) {
+   				GameObject dotGO = Instantiate(dotPrefab);
+				dotGO.transform.position = v;
+   			}
+   		}
+   		Debug.LogFormat("Crate: Can Rotate {0}", this.xy);
    		foreach (Vector2 target in toCheck) {
    			// Debug.LogFormat("Checking {0}",target);
    			Machine targetMachine = Machines.At(target);
    			bool blockedByObstacle = targetMachine && targetMachine.isObstacle;
-   			if (blockedByObstacle) return false;
+   			if (blockedByObstacle) {
+   				Debug.Log("blockedByObstacle");
+   				return false;
+   			}
 
    			bool blockedByPusherArm = CheckPusherArms(target);
-   			if (blockedByPusherArm) return false;
+   			if (blockedByPusherArm) {
+   				Debug.Log("blockedByPusherArm");
+   				return false;
+   			}
 
    			Crate targetCrate = Crates.At(target);
    			if (targetCrate) {
-				  if (targetCrate && !group.crates.Contains(targetCrate)) return false;
+				  if (targetCrate && !group.crates.Contains(targetCrate)) {
+				  	Debug.Log("blockedByOtherCrateGroup");
+				  	return false;
+				  }
    			}
    		}
    		return true;
