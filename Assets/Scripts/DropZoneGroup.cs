@@ -23,7 +23,7 @@ public class DropZoneGroup {
          Crate crate = Crates.At(zone.xy);
          if (crate == null) return;
          if (!zone.CheckPaint(crate)) return;
-         else if (g == null) g = crate.group;
+         if (g == null) g = crate.group;
          else if (crate.group != g) return;
       }
       Debug.Log("________accept_________");
