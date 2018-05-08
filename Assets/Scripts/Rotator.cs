@@ -5,6 +5,7 @@ using System.Linq;
 
 
 public class Rotator : Machine {
+
 	public bool isCCW;
 	private static int STEPS = 50;
 	private static double ANG_STEP = 2*(Math.PI)/STEPS;
@@ -40,15 +41,16 @@ public class Rotator : Machine {
 
   	public static List<Vector2> GetSquaresToCheck (Vector2 xy, Vector3 spin){
   		// List<Vector2> circle = Rotator.MidpointCenterAlgorithm(xy, spin);
-  		// Debug.Log("running get squares to check");
+  		// Debug.LogFormat("checking {0}", xy);
   		double xt = (double)spin[0]-(double)xy[0];
 	   	double yt = (double)spin[1]-(double)xy[1];
 	   	double radius = Math.Sqrt(xt*xt + yt*yt);
   		Vector2 center = new Vector2 (spin[0], spin[1]);
   		List<Vector2> circle = Rotator.MakeCircle(center, radius);
   		// Debug.LogFormat("xy:{0}, center: {1}", xy, center);
+  		// Debug.Log("logging circle");
   		// foreach(Vector2 p in circle) {
-   			// Debug.Log(p);
+   			// Debug.LogFormat("--{0}",p);
    		// }
   		
   		Vector2 target = Rotator.RotateVector(xy, spin);
@@ -58,6 +60,7 @@ public class Rotator : Machine {
    		List<Vector2> a = Rotator.InclusiveSlice(circle, xy, target, ccw);
    		
    		// return circle; 
+   		
    		return a;
   	}
 
@@ -179,8 +182,6 @@ public class Rotator : Machine {
 		return l[xi, yi];
 	}
 
-
-
 	private static List<Vector2> MakeCircle(Vector2 center, double radius){
 		
 		List<Vector2> buddie = new List<Vector2>();
@@ -199,85 +200,42 @@ public class Rotator : Machine {
 			int yint = (int)Math.Round(y);
 
 			int q = Quadrent(new double[] {x, y});
-			// switch(q)
-			if (q == 0) {
-				
-				// buddiex.append(xint)
-				// buddiey.append(yint +1)
+			if (q == 0) {	
 				buddie.Add(new Vector2(xint, yint+1));
-
-				// buddiex.append(xint - 1)
-				// buddiey.append(yint + 1)
 				buddie.Add(new Vector2(xint-1, yint+1));
-
-				// buddiex.append(xint - 1)
-				// buddiey.append(yint)
 				buddie.Add(new Vector2(xint-1, yint));
 			}
 			else if (q == 1) {
-				// buddiex.append(xint)
-				// buddiey.append(yint + 1)
 				buddie.Add(new Vector2(xint, yint+1));
 			}
 			else if (q == 2) {
-				// buddiex.append(xint)
-				// buddiey.append(yint + 1)
 				buddie.Add(new Vector2(xint, yint+1));
-
-				// buddiex.append(xint + 1)
-				// buddiey.append(yint + 1)
 				buddie.Add(new Vector2(xint+1, yint+1));
-				
-				// buddiex.append(xint + 1)
-				// buddiey.append(yint)
 				buddie.Add(new Vector2(xint+1, yint));
 			}
 			else if (q == 3) {
-				// buddiex.append(xint - 1);
-				// buddiey.append(yint);
 				buddie.Add(new Vector2(xint-1, yint));
 			}
 			else if (q == 5){
-				// buddiex.append(xint + 1)
-				// buddiey.append(yint)
 				buddie.Add(new Vector2(xint+1,yint));
 			}
 			else if (q == 6){
-				// buddiex.append(xint - 1)
-				// buddiey.append(yint)
 				buddie.Add(new Vector2(xint-1, yint));
-
-				// buddiex.append(xint - 1)
-				// buddiey.append(yint - 1)
 				buddie.Add(new Vector2(xint-1, yint-1));
-
-				// buddiex.append(xint)
-				// buddiey.append(yint - 1)
 				buddie.Add(new Vector2(xint, yint-1));
 			}
 			else if (q == 7){
-				// buddiex.append(xint)
-				// buddiey.append(yint - 1)
 				buddie.Add(new Vector2(xint, yint-1));
 			}
 			else if (q == 8){
-				// buddiex.append(xint + 1)
-				// buddiey.append(yint)
 				buddie.Add(new Vector2(xint+1,yint));
-
-				// buddiex.append(xint + 1)
-				// buddiey.append(yint - 1)
 				buddie.Add(new Vector2(xint+1, yint-1));
-
-				// buddiex.append(xint)
-				// buddiey.append(yint - 1)
 				buddie.Add(new Vector2(xint, yint-1));
 			}
-			// buddiex.append(xint)
-			// buddiey.append(yint)
 			buddie.Add(new Vector2(xint, yint));
 		}
-		return buddie;
+		List<Vector2> distinctBuddie = buddie.Distinct().ToList();
+		return distinctBuddie;
 	}
 
 

@@ -11,11 +11,20 @@ public class GameManager : MonoBehaviour {
    public static Tap Tap {get{ return instance.tap; }}
    public int height;
    public int width;
+   public GameObject tilePrefab;
 
 	void Awake () {
       instance = this;
       stairMaster = gameObject.GetComponent<StairMaster>();
 		Machines.Init(height, width);
       Crates.Init(height, width);
+
+      // tile background
+      for (int x = 0; x < width; x++) {
+      	for (int y = 0; y < height; y++) {
+      		GameObject tileGO = Instantiate(tilePrefab);
+      		tileGO.transform.position = new Vector3(x, y, -3);
+      	}
+      }
 	}
 }
