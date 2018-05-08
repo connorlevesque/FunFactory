@@ -37,7 +37,9 @@ public class MachineUI : MonoBehaviour {
 
    public void SetupButton(GameObject btnGob, GameObject machineGob) {
       Button btn = btnGob.GetComponent<Button>();
-      btn.onClick.AddListener(() => toPlace = machineGob);
+      btn.onClick.AddListener(() => {
+         toPlace = (toPlace != machineGob) ? machineGob : null;
+      });
    }
 
    public void SetInitialRotations() {

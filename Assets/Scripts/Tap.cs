@@ -20,14 +20,8 @@ public class Tap : MonoBehaviour {
 
       bool notRunning = !GameManager.StairMaster.running;
       if (isStarted && notRunning) {
-         if (CanPlaceMachine()) {
-            PlaceMachine();
-         }
-         if (CanSelectMachine()) {
-            SelectMachine();
-         } else {
-            UI.Select.Deselect();
-         }
+         if (CanPlaceMachine()) PlaceMachine();
+         if (CanSelectMachine()) SelectMachine();
       }
       if (isStarted && notRunning && !IsPointerOverTag("SelectUI") && !CanSelectMachine()) {
          UI.Select.Deselect();
@@ -44,9 +38,8 @@ public class Tap : MonoBehaviour {
    }
 
    private bool CanPlaceMachine() {
-      if (IsPointerOverUI()) return false;
-      if (!UI.Machines.toPlace) return false;
-      if (UI.Select.selectedMachineGob != null) return false;
+      if (IsPointerOverUI() || !UI.Machines.toPlace 
+            || UI.Select.selectedMachineGob != null) return false;
       Vector2 position = RoundVector(MouseWorldPosition());
       return !Machines.ElementAt(position);
    }

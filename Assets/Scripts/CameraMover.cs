@@ -40,9 +40,7 @@ public class CameraMover : MonoBehaviour {
       if (!scrollVert) move.y = 0;
       if (!scrollHor) move.x = 0;
 
-      Debug.LogFormat("start pos = {0}", transform.position);
       transform.position += move;
-      Debug.LogFormat("final pos = {0}", transform.position);
       dragOrigin = Input.mousePosition;
       SnapToBoundaries();
    }
