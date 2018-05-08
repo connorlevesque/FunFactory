@@ -6,12 +6,20 @@ public class Tap : MonoBehaviour {
 
    public bool isStarted = false;
    public bool isHeld = false;
+   public GameObject cameraGob;
+   public CameraMover cameraMover;
+
+   void Start() {
+      cameraMover = cameraGob.GetComponent<CameraMover>();
+   }
 
    void Update() {
       isStarted = Input.GetMouseButtonDown(0);
       isHeld = Input.GetMouseButton(0);
+      HandleDrag();
+
       bool notRunning = !GameManager.StairMaster.running;
-      if (isStarted && notRunning && !IsPointerOverUI()) {
+      if (isStarted && notRunning) {
          if (CanPlaceMachine()) {
             PlaceMachine();
          }
@@ -26,7 +34,17 @@ public class Tap : MonoBehaviour {
       }
    }
 
+   private void HandleDrag() {
+      if (isStarted) cameraMover.RecordDragStart();
+      if (CanDragCamera()) cameraMover.Move();
+   }
+
+   private bool CanDragCamera() {
+      return isHeld && !CanPlaceMachine() && !CanSelectMachine();
+   }
+
    private bool CanPlaceMachine() {
+      if (IsPointerOverUI()) return false;
       if (!UI.Machines.toPlace) return false;
       if (UI.Select.selectedMachineGob != null) return false;
       Vector2 position = RoundVector(MouseWorldPosition());
@@ -42,6 +60,7 @@ public class Tap : MonoBehaviour {
    }
 
    private bool CanSelectMachine() {
+      if (IsPointerOverUI()) return false;
       Vector2 position = RoundVector(MouseWorldPosition());
       return Machines.ElementAt(position);
    }

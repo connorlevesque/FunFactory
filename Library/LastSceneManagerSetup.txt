@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/BugTest2.unity
-=======
-- path: Assets/Scenes/MY SCENE DO NOT ENTER.unity
->>>>>>> 34b522899c109d893693155004eb9060de76c506
+- path: Assets/Scenes/Master2.unity
   isLoaded: 1
   isActive: 1
