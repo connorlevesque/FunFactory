@@ -25,14 +25,14 @@ public class MachineUI : MonoBehaviour {
    public GameObject toPlace;
 
    void Start() {
+      SetInitialRotations();
       buttons = new GameObject[] {conveyorBtn, spinnerBtn, welderBtn, pusherBtn, sensorBtn, wireBtn};
       SetupButton(conveyorBtn, conveyorPrefab);
-      // SetupButton( spinnerBtn, spinnerPrefab );
+      SetupButton( spinnerBtn, spinnerPrefab );
       SetupButton(  welderBtn, welderPrefab  );
       SetupButton(  pusherBtn, pusherPrefab  );
       SetupButton(  sensorBtn, sensorPrefab  );
       SetupButton(    wireBtn, wirePrefab    );
-      SetInitialRotations();
    }
 
    public void SetupButton(GameObject btnGob, GameObject machineGob) {
@@ -40,11 +40,14 @@ public class MachineUI : MonoBehaviour {
       btn.onClick.AddListener(() => {
          toPlace = (toPlace != machineGob) ? machineGob : null;
       });
+      Image btnImage = btnGob.GetComponent<Image>();
+      SpriteRenderer machineRenderer = machineGob.GetComponent<SpriteRenderer>();
+      btnImage.sprite = machineRenderer.sprite;
    }
 
    public void SetInitialRotations() {
       conveyorPrefab.transform.eulerAngles = new Vector3(0,0,0);
-      //spinnerPrefab.transform.eulerAngles = new Vector3(0,0,0);
+      spinnerPrefab.transform.eulerAngles = new Vector3(0,0,0);
       welderPrefab.transform.eulerAngles = new Vector3(0,0,0);
       pusherPrefab.transform.eulerAngles = new Vector3(0,0,0);
       sensorPrefab.transform.eulerAngles = new Vector3(0,0,0);

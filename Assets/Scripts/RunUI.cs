@@ -11,14 +11,16 @@ public class RunUI : MonoBehaviour {
    public GameObject fastForwardBtn;
    public GameObject resetBtn;
    public GameObject clearBtn;
-   private Text playPause;
+   public Sprite playSprite;
+   public Sprite pauseSprite;
+   private Image playPauseImage;
 
    void Start() {
+      playPauseImage = playPauseBtn.GetComponent<Image>();
       SetupButton(playPauseBtn,   ()=>PlayPause());
       SetupButton(resetBtn,       ()=>Reset());
       SetupButton(clearBtn,       ()=>Clear());
       SetupButton(fastForwardBtn, ()=>FastForward());
-      playPause = playPauseBtn.transform.GetChild(0).GetComponent<Text>();
    }
 
    public void SetupButton(GameObject btnGO, UnityAction method) {
@@ -27,19 +29,18 @@ public class RunUI : MonoBehaviour {
    }
 
    private void PlayPause() {
-      if (!Running()) { Play();  }
-      else            { Pause(); }
+      if (Running()) Pause(); else Play();
    }
 
    private void Play() {
       UI.Machines.Hide();
       this.Show();
-      playPause.text = "Pause";
+      playPauseImage.sprite = pauseSprite;
       GameManager.StairMaster.Run();
    }
 
    private void Pause() {
-      playPause.text = "Play";
+      playPauseImage.sprite = playSprite;
       GameManager.StairMaster.Pause();
    }
 

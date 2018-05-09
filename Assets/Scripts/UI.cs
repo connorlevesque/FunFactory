@@ -13,8 +13,8 @@ public class UI : MonoBehaviour {
 
    void Awake() {
       instance = this;
-      runControls = gameObject.transform.GetChild(0).GetComponent<RunUI>();
-      machines = gameObject.transform.GetChild(1).GetComponent<MachineUI>();
-      select = gameObject.transform.GetChild(2).GetComponent<SelectUI>();
+      runControls = gameObject.transform.GetChild(1).GetComponent<RunUI>();
+      machines = gameObject.transform.GetChild(2).GetComponent<MachineUI>();
+      select = gameObject.transform.GetChild(3).GetComponent<SelectUI>();
    }
 }
