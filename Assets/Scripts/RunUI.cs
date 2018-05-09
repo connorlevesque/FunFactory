@@ -11,16 +11,21 @@ public class RunUI : MonoBehaviour {
    public GameObject fastForwardBtn;
    public GameObject resetBtn;
    public GameObject clearBtn;
+   public GameObject openGameMenuBtn;
+   public GameObject closeGameMenuBtn;
+   public GameObject gameMenu;
    public Sprite playSprite;
    public Sprite pauseSprite;
    private Image playPauseImage;
 
    void Start() {
       playPauseImage = playPauseBtn.GetComponent<Image>();
-      SetupButton(playPauseBtn,   ()=>PlayPause());
-      SetupButton(resetBtn,       ()=>Reset());
-      SetupButton(clearBtn,       ()=>Clear());
-      SetupButton(fastForwardBtn, ()=>FastForward());
+      SetupButton(playPauseBtn,     ()=>PlayPause());
+      SetupButton(resetBtn,         ()=>Reset());
+      SetupButton(clearBtn,         ()=>Clear());
+      SetupButton(fastForwardBtn,   ()=>FastForward());
+      SetupButton(openGameMenuBtn,  ()=>gameMenu.SetActive(true));
+      SetupButton(closeGameMenuBtn, ()=>gameMenu.SetActive(false));
    }
 
    public void SetupButton(GameObject btnGO, UnityAction method) {
@@ -61,7 +66,6 @@ public class RunUI : MonoBehaviour {
    }
 
    private void Clear() {
-      // add confirmation popup
       Reset();
       Machines.ForEach((machine) => {
          if (machine.wasPlaced) {
@@ -69,6 +73,7 @@ public class RunUI : MonoBehaviour {
             Destroy(machine.gameObject);
          }
       });
+      gameMenu.SetActive(false);
    }
 
    private void Show() {
