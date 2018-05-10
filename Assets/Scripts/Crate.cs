@@ -30,8 +30,8 @@ public class Crate : GridThing {
      	int crateRotationInt = crateRotation/90;
      	int paintSide = nfmod(GetSideIntFromVector(side) - crateRotationInt, 4);
    		// Debug.LogFormat("crate: {0}, side: {1}, paintSide: {2}, modded: {3}", crateRotationInt, GetSideIntFromVector(side), paintSide, nfmod(paintSide, 4));
-   		PaintCrateOnCrateSide(paintSide);
-   		WorldPainted();
+   		if (painted[paintSide] == 0) PaintCrateOnCrateSide(paintSide);
+   		// WorldPainted();
    	}
 
     int nfmod(int x,int y) {
