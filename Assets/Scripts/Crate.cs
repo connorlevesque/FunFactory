@@ -34,7 +34,7 @@ public class Crate : GridThing {
    		if (painted[paintSide] == 0) PaintCrateOnCrateSide(paintSide);
    		// WorldPainted();
 		// Debug.LogFormat("crate: {0}, side: {1}, paintSide: {2}, modded: {3}", crateRotationInt, GetSideIntFromVector(side), paintSide, nfmod(paintSide, 4));
-		PaintCrateOnCrateSide(paintSide);
+		// PaintCrateOnCrateSide(paintSide);
 		WorldPainted();
 	}
 
@@ -138,7 +138,7 @@ public class Crate : GridThing {
 			dotGO.transform.position = v;
 			}
 		}
-		Debug.LogFormat("Crate: Can Rotate {0}", this.xy);
+		// Debug.LogFormat("Crate: Can Rotate {0}", this.xy);
 		foreach (Vector2 target in toCheck) {
 			// Debug.LogFormat("Checking {0}",target);
 			Machine targetMachine = Machines.At(target);
@@ -199,7 +199,7 @@ public class Crate : GridThing {
    		// Debug.LogFormat("Confirm: moving {0} in dir {1}", this.xy, direction);
       if (hasMoved || direction == Vector2.zero || IsNanVector(direction)) return;
       hasMoved = true;
-      Debug.LogFormat("xy = {0}, direction = {1}", xy, direction);
+      // Debug.LogFormat("xy = {0}, direction = {1}", xy, direction);
       Vector2 target = xy + direction;
       bool offGrid = !Crates.InBounds(target);
       if (offGrid) {
