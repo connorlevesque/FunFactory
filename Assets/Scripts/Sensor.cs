@@ -5,7 +5,7 @@ using UnityEngine;
 public class Sensor : Wire {
 
    public Vector2 direction;
-   public static Vector2 placingDirection = new Vector3(1,0,0);
+   public static Vector2 placingDirection = new Vector3(0,1,0);
    public static Vector3 placingRotation = new Vector3(0,0,0);
 
    public override void Start() {
