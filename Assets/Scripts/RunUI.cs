@@ -90,7 +90,6 @@ public class RunUI : MonoBehaviour {
    private void Hide() {
       fastForwardBtn.SetActive(false);
       resetBtn.SetActive(false);
-      clearBtn.SetActive(false);
    }
 
    private bool Running() {
