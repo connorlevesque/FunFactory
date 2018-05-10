@@ -44,16 +44,31 @@ public class MachineUI : MonoBehaviour {
       SetupButton(  sensorBtn, sensorPrefab  );
       SetupButton(    wireBtn, wirePrefab    );
       Show();
+      GrayOutButtons();
    }
 
    public void SetupButton(GameObject btnGob, GameObject machineGob) {
       Button btn = btnGob.GetComponent<Button>();
       btn.onClick.AddListener(() => {
-         toPlace = (toPlace != machineGob) ? machineGob : null;
+         GrayOutButtons();
+         if (toPlace != machineGob) {
+            toPlace = machineGob;
+            GameObject grayOut = btnGob.transform.GetChild(0).gameObject;
+            grayOut.SetActive(false);
+         } else {
+            toPlace = null;
+         }
       });
       Image btnImage = btnGob.GetComponent<Image>();
       SpriteRenderer machineRenderer = machineGob.GetComponent<SpriteRenderer>();
       btnImage.sprite = machineRenderer.sprite;
+   }
+
+   public void GrayOutButtons() {
+      foreach (GameObject btnGob in buttons) {
+         GameObject grayOut = btnGob.transform.GetChild(0).gameObject;
+         grayOut.SetActive(true);
+      }
    }
 
    public void Show() {
