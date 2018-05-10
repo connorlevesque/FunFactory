@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/Master2.unity
-=======
-- path: Assets/Scenes/MY SCENE DO NOT ENTER.unity
->>>>>>> c0bf89e11d71a4652ab9dcb0bd1ac214ce2c4b71
-  isLoaded: 1
-  isActive: 1
+- path: Assets/Scenes/Master3.unity
+  isLoaded: 0
+  isActive: 0
