@@ -27,7 +27,7 @@ public class DropZone : Machine {
 	}
 
 	private void PaintZone(int side) {
-   		GameObject paintGO = Instantiate(paintPrefab, this.transform, false);
+   	GameObject paintGO = Instantiate(paintPrefab, this.transform, false);
 		paintGO.transform.parent = this.transform;
      	Vector3 pos = Vector3.zero;
      	int ang = 0;

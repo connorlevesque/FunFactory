@@ -7,13 +7,16 @@ using System.Linq;
 public class Rotator : Machine {
 
 	public bool isCCW;
+   public Sprite cwSprite;
+   public Sprite ccwSprite;
+   private new SpriteRenderer renderer;
 	private static int STEPS = 50;
 	private static double ANG_STEP = 2*(Math.PI)/STEPS;
 	private CrateGroup lastGroup;
 
-
 	public override void Start() {
 		base.Start();
+      renderer = GetComponent<SpriteRenderer>();
 		isObstacle = false;
 		// midpointCenterAlgorithm();	
 	}
@@ -25,6 +28,11 @@ public class Rotator : Machine {
 	public CrateGroup getLastGroup () {
 		return this.lastGroup;
 	}
+
+   public override void Rotate(bool clockwise) {
+      isCCW = !isCCW;
+      renderer.sprite = (isCCW) ? ccwSprite : cwSprite;
+   }
 
 	public override void OnStepStart() {
 		// Debug.Log("Rotator onsttepstart");
