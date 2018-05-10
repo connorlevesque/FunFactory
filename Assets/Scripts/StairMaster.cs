@@ -36,15 +36,22 @@ public class StairMaster : MonoBehaviour {
 
 	void Update () {
       //if (!running) Run();
-		// call step methods for each machine
-         // Debug.Log("----------STEP----------");
-
+      // Debug.Log("----------STEP----------");
       if (running && IsNewStep()) {
          OnStepStart();
          ApplyForces();
-
+         if (IsLevelComplete()) {
+            UI.RunControls.Congratulate();
+         }
       }
 	}
+
+   private bool IsLevelComplete() {
+      foreach (DropZone zone in GetDropZones()) {
+         if (zone.group.count < zone.group.quota) return false;
+      }
+      return true;
+   }
 
    private bool IsNewStep() {
       stepTime += Time.deltaTime;
@@ -57,7 +64,6 @@ public class StairMaster : MonoBehaviour {
    }
 
    private void OnStepStart() {
-      // Debug.Log("===========stairmaster_start=============");
       Crates.ForEach((crate) => crate.OnStepStart());
       Crates.ForEachGroup((group) => group.OnStepStart());
       Machines.ForEach((machine) => machine.OnStepStart()); 
@@ -72,6 +78,14 @@ public class StairMaster : MonoBehaviour {
       foreach (Generator gen in generators) {
          gen.MakeCrate();
       }
+   }
+
+   private List<DropZone> GetDropZones() {
+      List<DropZone> list = new List<DropZone>();
+      Machines.ForEach((machine) => {
+         if (machine is DropZone) list.Add((DropZone)machine);
+      });
+      return list;
    }
 
    private List<Generator> GetGenerators() {

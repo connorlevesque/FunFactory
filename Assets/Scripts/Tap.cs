@@ -49,7 +49,6 @@ public class Tap : MonoBehaviour {
       Vector2 position = RoundVector(MouseWorldPosition());
       GameObject prefab = Instantiate(UI.Machines.toPlace, position, Quaternion.identity);
       Machine machine = prefab.GetComponent<Machine>();
-      //prefab.transform.rotation = UI.Machines.toPlace.transform.rotation;
       machine.wasPlaced = true;
    }
 

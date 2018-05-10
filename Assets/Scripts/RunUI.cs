@@ -14,6 +14,8 @@ public class RunUI : MonoBehaviour {
    public GameObject openGameMenuBtn;
    public GameObject closeGameMenuBtn;
    public GameObject gameMenu;
+   public GameObject levelCompletePopup;
+   public bool completePopupShown = false;
    public Sprite playSprite;
    public Sprite pauseSprite;
    private Image playPauseImage;
@@ -25,7 +27,10 @@ public class RunUI : MonoBehaviour {
       SetupButton(clearBtn,         ()=>Clear());
       SetupButton(fastForwardBtn,   ()=>FastForward());
       SetupButton(openGameMenuBtn,  ()=>gameMenu.SetActive(true));
-      SetupButton(closeGameMenuBtn, ()=>gameMenu.SetActive(false));
+      SetupButton(closeGameMenuBtn, ()=>{
+         gameMenu.SetActive(false);
+         levelCompletePopup.SetActive(false);
+      });
    }
 
    public void SetupButton(GameObject btnGO, UnityAction method) {
@@ -90,5 +95,12 @@ public class RunUI : MonoBehaviour {
 
    private bool Running() {
       return GameManager.StairMaster.running;
+   }
+
+   public void Congratulate() {
+      if (completePopupShown) return;
+      gameMenu.SetActive(true);
+      levelCompletePopup.SetActive(true);
+      completePopupShown = true;
    }
 }

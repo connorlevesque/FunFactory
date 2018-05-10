@@ -22,16 +22,28 @@ public class MachineUI : MonoBehaviour {
    public GameObject sensorPrefab;
    public GameObject wirePrefab;
 
+   private bool[] machinePermissions;
+   public bool enableConveyors;
+   public bool enableSpinners;
+   public bool enableWelders;
+   public bool enablePushers;
+   public bool enableSensors;
+   public bool enableWires;
+
    public GameObject toPlace;
 
    void Start() {
-      buttons = new GameObject[] {conveyorBtn, spinnerBtn, welderBtn, pusherBtn, sensorBtn, wireBtn};
+      buttons = new GameObject[] {conveyorBtn, spinnerBtn, welderBtn, 
+                                    pusherBtn, sensorBtn, wireBtn};
+      machinePermissions =   new bool[] {enableConveyors, enableSpinners, enableWelders, 
+                                    enablePushers, enableSensors, enableWires};
       SetupButton(conveyorBtn, conveyorPrefab);
       SetupButton( spinnerBtn, spinnerPrefab );
       SetupButton(  welderBtn, welderPrefab  );
       SetupButton(  pusherBtn, pusherPrefab  );
       SetupButton(  sensorBtn, sensorPrefab  );
       SetupButton(    wireBtn, wirePrefab    );
+      Show();
    }
 
    public void SetupButton(GameObject btnGob, GameObject machineGob) {
@@ -45,7 +57,9 @@ public class MachineUI : MonoBehaviour {
    }
 
    public void Show() {
-      foreach (GameObject btnGob in buttons) btnGob.SetActive(true);
+      for (int i = 0; i < buttons.Length; i++) {
+         buttons[i].SetActive(machinePermissions[i]);
+      }
    }
 
    public void Hide() {
