@@ -69,7 +69,7 @@ public class RunUI : MonoBehaviour {
       Machines.ForEach((machine) => {
          if (machine is DropZone) {
             DropZone zone = (DropZone)machine;
-            zone.count = 0;
+            zone.group.count = 0;
          }
       });
       this.Hide();
