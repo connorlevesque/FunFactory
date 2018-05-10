@@ -66,6 +66,12 @@ public class RunUI : MonoBehaviour {
       Pause();
       Crates.ForEach((crate) => Destroy(crate.gameObject));
       Crates.RemoveAll();
+      Machines.ForEach((machine) => {
+         if (machine is DropZone) {
+            DropZone zone = (DropZone)machine;
+            zone.count = 0;
+         }
+      });
       this.Hide();
       UI.Machines.Show();
    }

@@ -13,6 +13,8 @@ public class UI : MonoBehaviour {
 
    void Awake() {
       instance = this;
+      GameObject toolBoxPanel = gameObject.transform.GetChild(0).gameObject;
+      toolBoxPanel.SetActive(true);
       runControls = gameObject.transform.GetChild(1).GetComponent<RunUI>();
       machines = gameObject.transform.GetChild(2).GetComponent<MachineUI>();
       select = gameObject.transform.GetChild(3).GetComponent<SelectUI>();
