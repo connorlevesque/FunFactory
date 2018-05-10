@@ -7,6 +7,8 @@ using UnityEngine;
 public class Welder : Machine {
 
    public Vector2 direction;
+   public static Vector2 placingDirection = new Vector3(1,0,0);
+   public static Vector3 placingRotation = new Vector3(0,0,0);
    public bool hasWelded = false;
    public bool print = false;
    public static List<Vector2> weldSquares;
@@ -15,6 +17,9 @@ public class Welder : Machine {
 
    public override void Start() {
       base.Start();
+      direction = placingDirection;
+      transform.eulerAngles = placingRotation;
+      isObstacle = true;
    }
 
    public override void OnStepStart() {
@@ -27,7 +32,8 @@ public class Welder : Machine {
       Vector3 degrees = new Vector3(0,0,0);
       degrees.z = clockwise ? -90 : 90;
       transform.Rotate(degrees, Space.World);
-      UI.Machines.welderPrefab.transform.Rotate(degrees, Space.World);
+      placingDirection = direction;
+      placingRotation = transform.eulerAngles;
    }
 
    private void Weld(List<CrateGroup> weldGroups) {

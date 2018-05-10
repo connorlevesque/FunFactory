@@ -26,7 +26,7 @@ public class Machine : GridThing {
       return u;
    }
 
-   public virtual void OffsetRotation() {}
+   public virtual void OffsetRotation()       {}
    public virtual void Rotate(bool clockwise) {}
-   public virtual void OnStepStart() {}
+   public virtual void OnStepStart()          {}
 }

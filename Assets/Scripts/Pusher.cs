@@ -5,6 +5,8 @@ using UnityEngine;
 public class Pusher : Machine {
 
    public Vector2 direction;
+   public static Vector2 placingDirection = new Vector3(1,0,0);
+   public static Vector3 placingRotation = new Vector3(0,0,0);
    public bool extended = false;
    private List<Sensor> sensors;
 
@@ -17,6 +19,8 @@ public class Pusher : Machine {
 
    public override void Start() {
       base.Start();
+      direction = placingDirection;
+      transform.eulerAngles = placingRotation;
       renderer = gameObject.GetComponent<SpriteRenderer>();
    }
 
@@ -35,7 +39,8 @@ public class Pusher : Machine {
       Vector3 degrees = new Vector3(0,0,0);
       degrees.z = clockwise ? -90 : 90;
       transform.Rotate(degrees, Space.World);
-      UI.Machines.pusherPrefab.transform.Rotate(degrees, Space.World);
+      placingDirection = direction;
+      placingRotation = transform.eulerAngles;
    }
 
    public void Extend() {

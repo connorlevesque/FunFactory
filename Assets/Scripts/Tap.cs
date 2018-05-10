@@ -8,6 +8,7 @@ public class Tap : MonoBehaviour {
    public bool isHeld = false;
    public GameObject cameraGob;
    public CameraMover cameraMover;
+   private const float TOOLBOX_TOP = 290;
 
    void Start() {
       cameraMover = cameraGob.GetComponent<CameraMover>();
@@ -48,7 +49,7 @@ public class Tap : MonoBehaviour {
       Vector2 position = RoundVector(MouseWorldPosition());
       GameObject prefab = Instantiate(UI.Machines.toPlace, position, Quaternion.identity);
       Machine machine = prefab.GetComponent<Machine>();
-      prefab.transform.rotation = UI.Machines.toPlace.transform.rotation;
+      //prefab.transform.rotation = UI.Machines.toPlace.transform.rotation;
       machine.wasPlaced = true;
    }
 
@@ -61,11 +62,14 @@ public class Tap : MonoBehaviour {
    private void SelectMachine() {
       Vector2 position = RoundVector(MouseWorldPosition());
       Machine machine = Machines.At(position);
-      if (machine.wasPlaced) UI.Select.Select(machine);
+      if (machine.wasPlaced) {
+         UI.Select.Select(machine);
+      }
    }
 
    public static bool IsPointerOverUI() {
-      return IsPointerOverTag("UI") || IsPointerOverTag("SelectUI");
+      bool overToolbox = Input.mousePosition.y < TOOLBOX_TOP;
+      return IsPointerOverTag("UI") || IsPointerOverTag("SelectUI") || overToolbox;
    }
 
    public static bool IsPointerOverTag(string tag) {

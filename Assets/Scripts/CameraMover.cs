@@ -23,10 +23,12 @@ public class CameraMover : MonoBehaviour {
       float halfCamHeight = camera.orthographicSize;
       float halfCamWidth = camera.orthographicSize * camera.aspect;
       float offset = 0.5f;
+      float verticalOffset = 4f;
       leftBound = halfCamWidth - mapBuffer - offset;
       rightBound = Crates.Width() + mapBuffer - offset - halfCamWidth;
-      lowerBound = halfCamHeight - mapBuffer - offset;
+      lowerBound = halfCamHeight - mapBuffer - offset - verticalOffset;
       upperBound = Crates.Height() + mapBuffer - offset - halfCamHeight;
+      SnapToBoundaries();
    }
 
    public void RecordDragStart() {
