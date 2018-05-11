@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class DropZoneGroup {
   
@@ -13,6 +14,8 @@ public class DropZoneGroup {
       foreach (DropZone zone in zones) {
          zone.group = this;
       }
+      List<DropZone> tmp = zones.Distinct().ToList();
+      zones = tmp;
    }
 
    public DropZoneGroup() {
@@ -27,6 +30,10 @@ public class DropZoneGroup {
          if (!zone.CheckPaint(crate)) return;
          if (g == null) g = crate.group;
          else if (crate.group != g) return;
+      }
+      if (g.crates.Count != zones.Count){
+         Debug.LogFormat("Broke cuz group overflow\n {0} crates, {1} zones", g.crates.Count, zones.Count);
+         // return;
       }
       count++;
       foreach(Crate crate in g.crates) {
