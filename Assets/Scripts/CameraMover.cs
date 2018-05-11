@@ -44,7 +44,7 @@ public class CameraMover : MonoBehaviour {
 
       transform.position += move;
       dragOrigin = Input.mousePosition;
-      SnapToBoundaries();
+      //SnapToBoundaries();
    }
 
    public void SnapToBoundaries() {
