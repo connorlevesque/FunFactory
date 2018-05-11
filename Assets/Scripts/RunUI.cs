@@ -13,6 +13,7 @@ public class RunUI : MonoBehaviour {
    public GameObject clearBtn;
    public GameObject openGameMenuBtn;
    public GameObject closeGameMenuBtn;
+   public GameObject exitBtn;
    public GameObject gameMenu;
    public GameObject levelCompletePopup;
    public bool completePopupShown = false;
@@ -21,11 +22,13 @@ public class RunUI : MonoBehaviour {
    private Image playPauseImage;
 
    void Start() {
+      exitBtn = transform.parent.GetChild(4).GetChild(0).gameObject;
       playPauseImage = playPauseBtn.GetComponent<Image>();
       SetupButton(playPauseBtn,     ()=>PlayPause());
       SetupButton(resetBtn,         ()=>Reset());
       SetupButton(clearBtn,         ()=>Clear());
       SetupButton(fastForwardBtn,   ()=>FastForward());
+      SetupButton(exitBtn,          ()=>LevelManager.LoadLevel(0));
       SetupButton(openGameMenuBtn,  ()=>gameMenu.SetActive(true));
       SetupButton(closeGameMenuBtn, ()=>{
          gameMenu.SetActive(false);
