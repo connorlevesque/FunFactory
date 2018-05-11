@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/Level_4.unity
+=======
+- path: Assets/Scenes/Level_max_demo.unity
+>>>>>>> 8032bd5d4d7ac82cdfa9d45596ad805587a1014c
   isLoaded: 1
   isActive: 1

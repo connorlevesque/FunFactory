@@ -10,8 +10,8 @@ public class Welder : Machine {
    public static Vector2 placingDirection = new Vector3(1,0,0);
    public static Vector3 placingRotation = new Vector3(0,0,0);
    public bool hasWelded = false;
-   public bool print = false;
-   public static List<Vector2> weldSquares;
+   public bool print = true;
+   // public static List<Vector2> weldSquares;
    private static Vector2[] cardinalDirections = new Vector2[]
       { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
 
@@ -37,13 +37,16 @@ public class Welder : Machine {
    }
 
    private void Weld(List<CrateGroup> weldGroups) {
+      // Debug.Log(weldGroups.Count);
+      int cratz = 0;
       if (weldGroups.Count <= 1) return;
-      if (print) Debug.Log("**WELD**");
-      // foreach (CrateGroup cg in weldGroups) {
-      //    foreach (Crate c in cg.crates) {
-      //       Debug.Log(c.xy);
-      //    }
-      // }
+      foreach (CrateGroup cg in weldGroups) {
+         foreach (Crate c in cg.crates) {
+            cratz++;
+         }
+      }
+      
+      if (cratz >= 6) Debug.Log("***Welding Big Group***");
       CrateGroup newGroup = weldGroups[0];
       weldGroups.RemoveAt(0);
       foreach (CrateGroup oldGroup in weldGroups) {
@@ -69,14 +72,12 @@ public class Welder : Machine {
             }
          }
       }
-
-      
       return weldGroups;
    }
 
    private static List<Vector2> GetWeldSquares() {
-      if (Welder.weldSquares != null) return weldSquares;
-      weldSquares = new List<Vector2>();
+      // if (Welder.weldSquares != null) return weldSquares;
+      List<Vector2> weldSquares = new List<Vector2>();
       Action<Machine> addWeldSquare = (machine) => {
          if (machine is Welder) {
             Welder welder = (Welder)machine;
