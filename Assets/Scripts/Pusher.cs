@@ -22,6 +22,7 @@ public class Pusher : Machine {
       direction = placingDirection;
       transform.eulerAngles = placingRotation;
       renderer = gameObject.GetComponent<SpriteRenderer>();
+      Debug.Log(this.xy);
    }
 
    public override void OnStepStart() {
@@ -65,6 +66,7 @@ public class Pusher : Machine {
       List<Sensor> sensors = new List<Sensor>();
       foreach (Vector2 cardinal in cardinalDirections) {
          if (cardinal == direction) continue;
+         if (!Machines.InBounds(xy+cardinal)) continue;
          Machine machine = Machines.At(xy+cardinal);
          if (machine && machine is Wire) {
             Wire wire = (Wire)machine;
