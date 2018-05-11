@@ -367,9 +367,9 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: fc9c0000
-    m_LastClickedID: 40188
-    m_ExpandedIDs: 16a3f9ff0ca5f9ff76a6f9ffa0d6faff4ad8faff12dbfaff24defaff00e0faffaae1faff9e15fbff3a49fbff484bfbff7a4dfbff5850fbff0452fbff1a55fbff0057fbffe058fbff5026fcff8029fcff5e2bfcfffe5cffffb261ffff7863ffff4c66ffff9e9dffff30a8ffff24b1ffffa4b2ffff76b8ffff84baffffa6bcffff30c6ffff5eccfffffacdffff7acfffff00d1ffff50d3ffffaed6ffff28d8ffffead9ffff8cddffff72dfffff8ee2ffff08e4ffffd0e5ffffaee7ffff76e9ffff1aebffffa6edffff26efffffc6f0ffff52f2ffff22f4ffff00f6ffff7af7ffff86fbffff000000000a610000ee61000010620000f08f0000d69c0000
+    m_SelectedIDs: c2460000
+    m_LastClickedID: 18114
+    m_ExpandedIDs: 1ef0ffff18f1ffff68f2ffff6cf2ffffacf2ffff14f3ffff72f3ffffc2f3ffffeaf3ffff12f4ffff6ef4ffff94f4ffffd8f4ffff0cf5ffff86f5ffffacf5ffffccf5ffffd8f5ffffe4f5ffffeef5ffff98fbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -545,9 +545,9 @@ MonoBehaviour:
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: dc2a0000
-    m_LastClickedID: 10972
-    m_ExpandedIDs: 000000003e290000682b000000ca9a3bffffff7f
+    m_SelectedIDs: 42290000
+    m_LastClickedID: 10562
+    m_ExpandedIDs: 00000000a0270000ce29000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -575,7 +575,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000003e290000682b0000
+    m_ExpandedIDs: 00000000a0270000ce290000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -602,7 +602,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
