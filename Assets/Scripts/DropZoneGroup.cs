@@ -33,7 +33,7 @@ public class DropZoneGroup {
       }
       if (g.crates.Count != zones.Count){
          Debug.LogFormat("Broke cuz group overflow\n {0} crates, {1} zones", g.crates.Count, zones.Count);
-         // return;
+         return;
       }
       count++;
       foreach(Crate crate in g.crates) {
